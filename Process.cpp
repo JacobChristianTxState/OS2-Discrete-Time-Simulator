@@ -29,7 +29,7 @@ int Process::getPriority(){
 }
 
 void Process::setRemainingServiceTime(float quantum){
-  remainingServiceTime = getServiceTime() - quantum;
+  remainingServiceTime = getRemainingServiceTime() - quantum;
 }
 
 void Process::setArrivalTime(float time){
