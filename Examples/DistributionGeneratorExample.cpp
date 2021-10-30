@@ -2,32 +2,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "DistributionGenerator.h"
+#include "../DistributionGenerator.h"
 
 int main() {
 
     float globalAverageArrivalTime = 0.0;
     float globalAverageServiceTime = 0.0;
-    for (int i = 1; i< 30; i++) {   //run lambda 1 through 10
+    for (int i = 1; i<= 30; i++) {   //run lambda 1 through 30
 
-        DistributionGenerator arrivalTime(i);
-        DistributionGenerator serviceTime(1/0.06);
+        DistributionGenerator arrivalTime(i, 1);
+        DistributionGenerator serviceTime(1/0.06, 2);
 
+        // //Do the first 
         float localAvgArrivalTime = arrivalTime.generateExponentialDist();
         float localAvgServiceTime = serviceTime.generateExponentialDist();
 
-        for (int j = 1; j < 10000; j++) {  //run 20 processes
+        printf("*** Running lambda = %d ***\n", i);
 
-            int currentArrivalTime = arrivalTime.generateExponentialDist();
-            int currentServiceTime = serviceTime.generateExponentialDist();
+        for (int j = 1; j < 10000; j++) {  //run 10,000 processes
 
+            float currentArrivalTime =  arrivalTime.generateExponentialDist();
+            float currentServiceTime =  serviceTime.generateExponentialDist();
             localAvgArrivalTime += currentArrivalTime;
             localAvgServiceTime += currentServiceTime;
         }
+        printf("\nLocal Average Arrival time for lambda = %d: %f ms\n", i, localAvgArrivalTime / 10000.0);
+        printf("Local Average Service time for lambda = %d: %f\n", i, localAvgServiceTime / 10000.0);
+
         globalAverageArrivalTime += localAvgArrivalTime;
         globalAverageServiceTime += localAvgServiceTime;
-    }
-    //200 total iterations (10 of i time 20 of j)
+    }   
+    //300,000 total 
     globalAverageArrivalTime /= (30.0*10000.0); 
     globalAverageServiceTime /= (30.0*10000.0); 
 
