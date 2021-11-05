@@ -1,21 +1,15 @@
 #include "Event.h"
 
-
-Event::Event(int type, float time){
-    this->type = type;
-    this->time = time;
+Event::Event(float t, bool ty){
+  time = t;
+  eType = ty;
 }
 
-int Event::getType(){
-    return type;
+bool Event::getType(){
+  return eType;
 }
 
 float Event::getTime(){
-    return time;
+  return time;
 }
-void Event::setProcess(Process p){
-    this->p = p;
-}
-Process Event::getProcess(){
-    return this->p;
-}
+
