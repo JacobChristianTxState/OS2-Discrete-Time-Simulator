@@ -2,12 +2,14 @@
 #define PROCESS
 
 class Process{
-  public:
+  private:
+    static int processCount;
     int id;
     float arrivalTime;
     float serviceTime;
     float remainingServiceTime;
     int priority;
+  public:
     //Constructor takes an id, an arrivalTime, a serviceTime, and a priority
     Process(int, float, float, int);
     Process(const Process &);
@@ -22,6 +24,8 @@ class Process{
     /* Sets the arrival time of the process*/
     void setArrivalTime(float);
     void setPriority(int);
+    void updateProcessServiceCount();
+    int getProcessCount();
 };
 
 #endif

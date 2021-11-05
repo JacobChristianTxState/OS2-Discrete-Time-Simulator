@@ -10,7 +10,6 @@ class DistributionGenerator {
     private:
         float lambda;
         int distributionType;
-        float min;
         float uniformRandom();
     public:
         DistributionGenerator(float lambda, int distributionType);

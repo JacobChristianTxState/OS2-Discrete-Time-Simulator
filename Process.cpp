@@ -47,3 +47,11 @@ void Process::setArrivalTime(float time){
 void Process::setPriority(int priority){
   this->priority = priority;
 }
+
+void Process::updateProcessServiceCount() {
+  this->processCount++;
+}
+
+int Process::getProcessCount() {
+  return this->processCount;
+}
