@@ -1,33 +1,39 @@
 #include "Driver.h"
+#include <iostream>
 
 Driver::Driver(float lambda, int a_id, float quantum):serviceTime(lambda), arrivalTime(lambda){
   algorithm_id = a_id;
   serveridle = true;
   this->quantum = quantum;
-  lambda = lambda;
+  this -> lambda = lambda;
+  process_count = 0;
+  Process p = Process(0, 0, serviceTime.generateExponentialDist(), 0);
+  processReadyQueue.push_back(p);
   clock = 0;
 }
 
 void Driver::run(){
-  for(int i = 0; i != 30; i++){
-    int process_count = 0;
+  //for(int i = 0; i != 30; i++){
+    process_count = 0;
     Event e = Event(arrivalTime.generateExponentialDist(), true);
     eventList.push_back(e);
-    while(process_count <= 10000){
+    while(process_count <= 50){
       handleEvent();
-      eventList.erase(eventList.begin());
     }
-  }
+    std::cout << "Process Count: " << process_count << "\n";
+  //}
 }
 
 void Driver::handleEvent(){
   //handling arrival
   if(eventList[0].getType()){
+    std::cout << "Handeling arrival\n";
     handleArr();
   }else{
+    std::cout << "Handeling departure\n";
     handleDep();
   }
-  eventList.erase(eventList.begin());
+  this->eventList.erase(eventList.begin());
 }
 
 void Driver::handleArr(){
@@ -65,8 +71,10 @@ float Driver::calcProcessTime(){
       return 0.0;
       break;
     default:
-      process_count++;
-      return processReadyQueue[0].getRemainingServiceTime();
+      this -> process_count++;
+      float t = processReadyQueue[0].getRemainingServiceTime();
+      processReadyQueue.erase(processReadyQueue.begin());
+      return t;
       break;
   }
 }
