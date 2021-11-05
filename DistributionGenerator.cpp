@@ -27,8 +27,7 @@ float DistributionGenerator::generateExponentialDist() {
             //wild random values for uniform genrator and interarrival times 1/0.06, keeps values close to 0.06
             while (x < lowerLimit || x > upperLimit) { x = -(1/this->lambda)*log(uniformRandom());}
             break;
-    }
-    if (x < this->min) {this->min = x;}
+    }    
     
     return x * 1000;
 
