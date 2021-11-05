@@ -10,6 +10,7 @@ class Process{
     int priority;
 
     Process(int, float, float, int);
+    Process();
     //Getters
     int getID();
     float getArrivalTime();

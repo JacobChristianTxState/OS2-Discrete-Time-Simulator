@@ -2,30 +2,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "DistributionGenerator.h"
+#include "../DistributionGenerator.h"
+#include "../Driver.h"
 
 int main() {
 
     float globalAverageArrivalTime = 0.0;
     float globalAverageServiceTime = 0.0;
-    for (int i = 1; i< 30; i++) {   //run lambda 1 through 10
+    int algorithm_id;
+    int first_quantum;
+    int second_quantum;
+    DistributionGenerator arrivalTime(1);
+    DistributionGenerator serviceTime(1/.06);
 
-        DistributionGenerator arrivalTime(i);
-        DistributionGenerator serviceTime(1/0.06);
 
-        float localAvgArrivalTime = arrivalTime.generateExponentialDist();
-        float localAvgServiceTime = serviceTime.generateExponentialDist();
+    Driver driver(arrivalTime, serviceTime);
 
-        for (int j = 1; j < 10000; j++) {  //run 20 processes
 
-            int currentArrivalTime = arrivalTime.generateExponentialDist();
-            int currentServiceTime = serviceTime.generateExponentialDist();
+    for(int c = 1; c < 5; c++){
+        
+        for(int i = 1; i < 30; i++){   //run lambda 1 through 10
 
-            localAvgArrivalTime += currentArrivalTime;
-            localAvgServiceTime += currentServiceTime;
+
+            driver.init(i);
+           
+
+            for (int j = 1; j < 10001; j++) {  //run 20 processes
+
+            
+             //   currentArrivalTime = (unsigned int) arrivalTime.generateExponentialDist();
+             //   currentServiceTime = (unsigned int) serviceTime.generateExponentialDist();
+
+                Process temp_process(j, currentArrivalTime, currentServiceTime, 1);
+
+             //   localAvgArrivalTime += currentArrivalTime;
+             //   localAvgServiceTime += currentServiceTime;
+             //   if(i == 2){
+             //       printf("current service time: %d \t local average service time: %f\n", currentServiceTime, localAvgServiceTime );
+             //   }
+            }
+
+          //  currentServiceTime = 0;
+          //  currentArrivalTime = 0;
+
+          //  globalAverageArrivalTime += localAvgArrivalTime;
+          //  globalAverageServiceTime += localAvgServiceTime;
+
+          //  printf("\t%f\n", globalAverageArrivalTime / 10000.0 );
+          // printf("\t%f\n", globalAverageServiceTime / 10000.0 );
+        
         }
-        globalAverageArrivalTime += localAvgArrivalTime;
-        globalAverageServiceTime += localAvgServiceTime;
     }
     //200 total iterations (10 of i time 20 of j)
     globalAverageArrivalTime /= (30.0*10000.0); 

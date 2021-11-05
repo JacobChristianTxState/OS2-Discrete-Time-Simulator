@@ -35,7 +35,6 @@ void Driver::run(int algorithm_id, int quantum){
 
             break;
     }
-   
 }
 
 void Driver::arr_handler(Event e, Process *p){

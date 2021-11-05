@@ -12,7 +12,7 @@ class DistributionGenerator {
         float uniformRandom();
     public:
         DistributionGenerator(float lambda);
-        int generateExponentialDist();
+        float generateExponentialDist();
 };
 
 #endif //DISTRIBUTIONGENERATOR_
