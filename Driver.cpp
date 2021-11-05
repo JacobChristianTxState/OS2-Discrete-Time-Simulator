@@ -16,7 +16,7 @@ void Driver::scheduleEvent(int type, int time) {
 
 void Driver::arriverHandler(Event e) {
   if (e.getProcess() == nullptr) {
-    Process* p();
+    //Process* p();
     scheduleEvent(DEP, this->clock + this->serviceTime.generateExponentialDist());
   } else {
     
