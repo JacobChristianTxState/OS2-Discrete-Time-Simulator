@@ -17,21 +17,20 @@ void Driver::run(){
     process_count = 0;
     Event e = Event(arrivalTime.generateExponentialDist(), true);
     eventList.push_back(e);
-    while(process_count <= 50){
+    while(process_count <= 10){
       handleEvent();
     }
-    std::cout << "Process Count: " << process_count << "\n";
   //}
 }
 
 void Driver::handleEvent(){
   //handling arrival
   if(eventList[0].getType()){
-    std::cout << "Handeling arrival\n";
     handleArr();
+    std::cout << "Clock after Handling Arrival: " << clock << "\n------------\n";
   }else{
-    std::cout << "Handeling departure\n";
     handleDep();
+    std::cout << "Clock: clock after Handling Departure: " << clock << "\n------------\n";
   }
   this->eventList.erase(eventList.begin());
 }
@@ -48,6 +47,7 @@ void Driver::handleArr(){
     //scheduleProcess
     scheduleProcess(p);
   }
+  clock += arrTime;
   Event arr = Event(clock + arrivalTime.generateExponentialDist(), true);
   eventList.push_back(arr);
 }
@@ -74,6 +74,7 @@ float Driver::calcProcessTime(){
       this -> process_count++;
       float t = processReadyQueue[0].getRemainingServiceTime();
       processReadyQueue.erase(processReadyQueue.begin());
+      clock += t;
       return t;
       break;
   }
