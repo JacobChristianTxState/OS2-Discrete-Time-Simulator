@@ -4,8 +4,9 @@
 #include "DistributionGenerator.h"
 #include <iostream>
 
-DistributionGenerator::DistributionGenerator(float lambda) {
+DistributionGenerator::DistributionGenerator(float lambda, int distributionType) {
     this->lambda = lambda;
+    this->distributionType = distributionType;
 }
 
 float DistributionGenerator::uniformRandom() {
@@ -13,16 +14,21 @@ float DistributionGenerator::uniformRandom() {
 }
 
 float DistributionGenerator::generateExponentialDist() {
+    float lowerLimit, upperLimit;
     float x = 0;
-    while (x == 0) {   
-        x = -(1/this->lambda)*log(uniformRandom());
-    }
-    return (int) std::round(x * 1000);
 
-}
+    switch(distributionType) {
+        case 1:
+            while (x ==0) { x = -(1/this->lambda)*log(uniformRandom());}
+            break;
+        case 2:
+            lowerLimit = 0.05;  
+            upperLimit = 0.07;
+            //wild random values for uniform genrator and interarrival times 1/0.06, keeps values close to 0.06
+            while (x < lowerLimit || x > upperLimit) { x = -(1/this->lambda)*log(uniformRandom());}
+            break;
+    }    
+    
+    return x * 1000;
 
-DistributionGenerator DistributionGenerator::operator= (const DistributionGenerator& dis){
-  DistributionGenerator gen(0);
-  gen.lambda = dis.lambda;
-  return gen;
 }
