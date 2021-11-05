@@ -1,45 +1,31 @@
 #ifndef DRIVER_H
 #define DRIVER_H
-
-#define ARR 0
-#define DEP 1
-
 #include "DistributionGenerator.h"
-#include "Process.h"
 #include "Event.h"
+#include "Process.h"
 #include <vector>
 
-class Driver
-{
-    public:
-
-        std::vector <Event> events;
-        std::vector <Process *> ready_queue;
-        int clock;
-        int process_count;
-        float service_time_constant;
-        Process *current_process;
-        DistributionGenerator arrivalTime;
-        DistributionGenerator serviceTime;
-
-        Driver(DistributionGenerator *, DistributionGenerator * );
-        void init();
-        void schedule_event(int, float);
-        void run(int, int);
-        void arr_handler(Event, Process *);
-        void dep_handler(Event, Process *);
-        void remove_event();
-        void remove_process();
-        void setArrivalTime(DistributionGenerator);
-        void setServiceTime(DistributionGenerator);
-        void setCurrentProcess(Process);
-        Process getCurrentProcess();
-        
-
-
-    protected:
-
-    private:
+class Driver{
+  private:
+    bool serveridle;
+    int algorithm_id;
+    int process_count;
+    float quantum;
+    float lambda;
+    float clock;
+    std::vector<Process> processReadyQueue;
+    std::vector<Event> eventList;
+    DistributionGenerator arrivalTime;
+    DistributionGenerator serviceTime;
+    void scheduleProcess(Process);
+    void determineLocation(Process);
+    void handleEvent();
+    float calcProcessTime();
+    void handleArr();
+    void handleDep();
+  public:
+    Driver(float, int, float);
+    void run();
 };
 
-#endif // DRIVER_H
+#endif

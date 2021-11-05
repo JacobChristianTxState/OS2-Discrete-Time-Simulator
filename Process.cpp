@@ -1,11 +1,19 @@
 #include "Process.h"
 
+//Constructor takes an id, an arrivalTime, a serviceTime, and a priority
 Process::Process(int id, float arrivalTime, float serviceTime, int priority){
   this->id = id;
-  this->arrivalTime = arrivalTime;
   this->serviceTime = serviceTime;
   this->remainingServiceTime = serviceTime;
   this->priority = priority;
+}
+
+Process::Process(const Process &p){
+  this->id = p.id;
+  this->arrivalTime = p.arrivalTime;
+  this->serviceTime = p.serviceTime;
+  this->remainingServiceTime = p.remainingServiceTime;
+  this->priority = p.priority;
 }
 
 int Process::getID(){
