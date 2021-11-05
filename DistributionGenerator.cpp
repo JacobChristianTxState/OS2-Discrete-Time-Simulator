@@ -28,7 +28,5 @@ float DistributionGenerator::generateExponentialDist() {
             while (x < lowerLimit || x > upperLimit) { x = -(1/this->lambda)*log(uniformRandom());}
             break;
     }    
-    
     return x * 1000;
-
 }
