@@ -6,7 +6,7 @@ void Driver::init() {
   this->clock = 0;
   generateProcesses();
   std::sort(process2Queue.begin(), process2Queue.end(), 
-    [](const Process2& p1, const Process2& p2) {
+    [=](const Process2& p1, const Process2& p2) {
         return p1.getArrivalTime() < p2.getArrivalTime();
     });
   process2Queue.front().setStartTime(
@@ -30,7 +30,7 @@ void Driver::generateProcesses() {
 }
 
 void Driver::run() {
-  for(int i = 1; i < process2Queue.size(); i++) {
+  for(size_t i = 1; i < process2Queue.size(); i++) {
     Process2* currentProcess = &process2Queue[i];
     Process2* previousProcess = &process2Queue[i-1];
     this->clock = previousProcess->getEndTime();
@@ -57,7 +57,7 @@ int Driver::returnClock() {
 }
 
 void Driver::displayList() {
-  for (int i = 0; i < process2Queue.size(); i++) {
+  for (size_t i = 0; i < process2Queue.size(); i++) {
     std::cout << "Process " << i << ":\n";
     std::cout << "\n\tArrival Time: " << process2Queue[i].getArrivalTime();
     std::cout << "\n\tService Time: " << process2Queue[i].getServiceTime();

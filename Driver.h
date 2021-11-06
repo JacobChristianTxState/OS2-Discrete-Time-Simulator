@@ -17,7 +17,7 @@ class Driver {
       DistributionGenerator serviceTime;
       std::vector<Process> processQueue;
       std::vector<Event> eventList;
-      int clock;
+      unsigned long clock;
       Process* activeProcess;
       Process createProcess();
 
