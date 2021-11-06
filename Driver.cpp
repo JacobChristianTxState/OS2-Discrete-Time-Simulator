@@ -1,11 +1,11 @@
 #include "Driver.h"
-#include <iostream>
 
-Driver::Driver(float lambda, int a_id, float quantum):serviceTime(lambda), arrivalTime(lambda){
+Driver::Driver(float lambda1, float lambda2, int a_id, float quantum):serviceTime(1/lambda1), arrivalTime(lambda2){
   algorithm_id = a_id;
   serveridle = true;
   this->quantum = quantum;
-  this -> lambda = lambda;
+  this -> lambda = lambda1;
+  int pid = 0;
   process_count = 0;
   float aT = arrivalTime.generateExponentialDist();
   Process p = Process(0, aT, serviceTime.generateExponentialDist(), 0);
@@ -19,23 +19,22 @@ void Driver::run(){
   //for(int i = 0; i != 30; i++){
     process_count = 0;
     while(process_count <= 10){
-      clock = eventList[0].getTime();
       handleEvent();
-    }
-  //}
+  }
+//}
 }
 
 void Driver::handleEvent(){
-  //handling arrival
-  clock = eventList[0].getTime();
-  if(eventList[0].getType()){
-    std::cout << "Arrival at Time: " << clock << "\n-----------\n";
-    handleArr();
-  }else{
-    std::cout << "Departure at Time: " << clock << "\n-----------\n";
+//handling arrival
+clock = eventList[0].getTime();
+if(eventList[0].getType()){
+  std::cout << "Arrival at Time: " << clock << "\n-----------\n";
+  handleArr();
+}else{
+  std::cout << "Departure at Time: " << clock << "\n-----------\n";
     handleDep();
   }
-  this->eventList.erase(eventList.begin());
+  eventList.erase(eventList.begin());
 }
 
 void Driver::handleArr(){
@@ -44,14 +43,15 @@ void Driver::handleArr(){
     serveridle = false;
     float duh = clock + calcProcessTime();
     Event dep = Event(duh, false);
-    eventList.push_back(dep);
+    scheduleEvent(dep);
   }else{
-    Process p = Process(0, clock + arrTime, serviceTime.generateExponentialDist(), 0);
+    Process p = Process(pid, clock + arrTime, serviceTime.generateExponentialDist(), 0);
+    pid++;
     //scheduleProcess
     scheduleProcess(p);
   }
   Event arr = Event(clock + arrTime, true);
-  eventList.push_back(arr);
+  scheduleEvent(arr);
 }
 
 void Driver::handleDep(){
@@ -59,7 +59,7 @@ void Driver::handleDep(){
     serveridle = true;
   }else{
     Event dep = Event(clock + calcProcessTime(), false);
-    eventList.push_back(dep);
+    scheduleEvent(dep);
     processReadyQueue.erase(processReadyQueue.begin());
   }
 }
@@ -89,4 +89,20 @@ void Driver::scheduleProcess(Process p){
       processReadyQueue.push_back(p);
       break;
   }
+}
+
+void Driver::scheduleEvent(Event e){
+  eventList.push_back(e);
+  if(eventList.size() > 1){
+    std::sort(eventList.begin(), eventList.end(), [](Event &E1, Event &E2){return E1.getTime()<E2.getTime();});
+  }
+  printList();
+}
+
+void Driver::printList(){
+  std::cout << "Print Events\n";
+  for (auto i : eventList){
+    std::cout << i.getType() << " time: " << i.getTime() << "\n";
+  }
+  std::cout << "Events done printing\n";
 }
