@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
     Driver driver(arrivalTime, serviceTime);
     driver.init();
     driver.run();
+    driver.displayList();
     driver.runSimulationStatistics();
     std::cout << "\n\nAverage CPU Utilization : " << driver.generateCpuUitilization() << " percent.\n";
     std::cout << "     Average Throughput : " << driver.generateThroughput() << " process/sec. \n";
