@@ -5,6 +5,7 @@ Process::Process(int id, float arrivalTime, float serviceTime, int priority){
   this->id = id;
   this->serviceTime = serviceTime;
   this->remainingServiceTime = serviceTime;
+  this->arrivalTime = arrivalTime;
   this->priority = priority;
 }
 

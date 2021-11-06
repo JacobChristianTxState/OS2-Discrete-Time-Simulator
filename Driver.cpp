@@ -7,17 +7,19 @@ Driver::Driver(float lambda, int a_id, float quantum):serviceTime(lambda), arriv
   this->quantum = quantum;
   this -> lambda = lambda;
   process_count = 0;
-  Process p = Process(0, 0, serviceTime.generateExponentialDist(), 0);
+  float aT = arrivalTime.generateExponentialDist();
+  Process p = Process(0, aT, serviceTime.generateExponentialDist(), 0);
   processReadyQueue.push_back(p);
+  Event e = Event(aT, true);
+  eventList.push_back(e);
   clock = 0;
 }
 
 void Driver::run(){
   //for(int i = 0; i != 30; i++){
     process_count = 0;
-    Event e = Event(arrivalTime.generateExponentialDist(), true);
-    eventList.push_back(e);
     while(process_count <= 10){
+      clock = eventList[0].getTime();
       handleEvent();
     }
   //}
@@ -25,12 +27,13 @@ void Driver::run(){
 
 void Driver::handleEvent(){
   //handling arrival
+  clock = eventList[0].getTime();
   if(eventList[0].getType()){
+    std::cout << "Arrival at Time: " << clock << "\n-----------\n";
     handleArr();
-    std::cout << "Clock after Handling Arrival: " << clock << "\n------------\n";
   }else{
+    std::cout << "Departure at Time: " << clock << "\n-----------\n";
     handleDep();
-    std::cout << "Clock: clock after Handling Departure: " << clock << "\n------------\n";
   }
   this->eventList.erase(eventList.begin());
 }
@@ -39,16 +42,15 @@ void Driver::handleArr(){
   float arrTime = arrivalTime.generateExponentialDist();
   if(serveridle == true){
     serveridle = false;
-    float duh = calcProcessTime();
+    float duh = clock + calcProcessTime();
     Event dep = Event(duh, false);
     eventList.push_back(dep);
   }else{
-    Process p = Process(0, arrTime, serviceTime.generateExponentialDist(), 0);
+    Process p = Process(0, clock + arrTime, serviceTime.generateExponentialDist(), 0);
     //scheduleProcess
     scheduleProcess(p);
   }
-  clock += arrTime;
-  Event arr = Event(clock + arrivalTime.generateExponentialDist(), true);
+  Event arr = Event(clock + arrTime, true);
   eventList.push_back(arr);
 }
 
@@ -74,7 +76,6 @@ float Driver::calcProcessTime(){
       this -> process_count++;
       float t = processReadyQueue[0].getRemainingServiceTime();
       processReadyQueue.erase(processReadyQueue.begin());
-      clock += t;
       return t;
       break;
   }
