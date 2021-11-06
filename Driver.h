@@ -4,12 +4,15 @@
 #include "Event.h"
 #include "Process.h"
 #include <vector>
+#include <algorithm>
+#include <iostream>
 
 class Driver{
   private:
     bool serveridle;
     int algorithm_id;
     int process_count;
+    int pid;
     float quantum;
     float lambda;
     float clock;
@@ -23,8 +26,10 @@ class Driver{
     float calcProcessTime();
     void handleArr();
     void handleDep();
+    void scheduleEvent(Event);
+    void printList();
   public:
-    Driver(float, int, float);
+    Driver(float, float, int, float);
     void run();
 };
 
