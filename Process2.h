@@ -10,7 +10,7 @@ class Process2 {
         float endTime = 0;
     
     public:
-        Process2(int at, int st) : arrivalTime(at), serviceTime(st) {}
+        Process2(float at, float st) : arrivalTime(at), serviceTime(st) {}
         float getArrivalTime();
         float getServiceTime();
         float getStartTime();
