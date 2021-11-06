@@ -6,8 +6,8 @@ void Driver::init() {
   this->clock = 0;
   generateProcesses();
   std::sort(process2Queue.begin(), process2Queue.end(), 
-    [=]( Process2& p1, Process2& p2) {
-        return p1.getArrivalTime() < p2.getArrivalTime();
+    [](const Process2& p1, const Process2& p2) {
+        return const (p1.getArrivalTime() < p2.getArrivalTime());
     });
   process2Queue.front().setStartTime(
     process2Queue.front().getArrivalTime()
