@@ -1,0 +1,300 @@
+
+
+
+CURRENTLY RUNNING LAMBDA = 1
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 296694 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 2
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297191 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 3
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297357 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 4
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297439 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 5
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297491 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 6
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297523 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 7
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297548 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 8
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297565 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 9
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297575 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 10
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297589 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 11
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297598 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 12
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297603 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 13
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297611 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 14
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297620 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 15
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297623 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 16
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297625 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 17
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297628 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 18
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297633 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 19
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297636 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 20
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297641 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 21
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297640 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 22
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297646 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 23
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297646 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 24
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297651 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 25
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297645 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 26
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297653 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 27
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297658 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 28
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297651 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 29
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297648 ms.
+       Final Clock Time : 595415 ms.
+
+
+
+CURRENTLY RUNNING LAMBDA = 30
+
+
+Average CPU Utilization : 100 percent.
+     Average Throughput : 16.795 process/sec. 
+Average Turnaround Time : 297660 ms.
+       Final Clock Time : 595415 ms.

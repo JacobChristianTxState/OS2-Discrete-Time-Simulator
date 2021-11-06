@@ -1,6 +1,12 @@
 #include "Event.h"
 
-Event::Event(float t, bool ty){
+Event::Event(float t, int ty, Process* currentProcess){
+  time = t;
+  eType = ty;
+  this->currentProcess = currentProcess;
+}
+
+Event::Event(float t, int ty){
   time = t;
   eType = ty;
   this->currentProcess = nullptr;

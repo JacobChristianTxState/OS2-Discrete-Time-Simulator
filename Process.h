@@ -13,6 +13,7 @@ class Process{
     //Constructor takes an id, an arrivalTime, a serviceTime, and a priority
     Process(int, float, float, int);
     Process(const Process &);
+    Process(float, float);
     //Getters
     int getID();
     float getArrivalTime();

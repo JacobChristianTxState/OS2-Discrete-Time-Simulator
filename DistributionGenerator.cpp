@@ -18,10 +18,10 @@ float DistributionGenerator::generateExponentialDist() {
     float x = 0;
 
     switch(distributionType) {
-        case 1:
+        case ARR:
             while (x ==0) { x = -(1/this->lambda)*log(uniformRandom());}
             break;
-        case 2:
+        case DEP:
             lowerLimit = 0.05;  
             upperLimit = 0.07;
             //wild random values for uniform genrator and interarrival times 1/0.06, keeps values close to 0.06

@@ -11,7 +11,8 @@ class Event{
     std::list<Event> listOfEvents;
     Process* currentProcess;
   public:
-    Event(float, bool);
+    Event(float, int, Process*);
+    Event(float, int);
     int getType();
     float getTime();
     Process* getProcess();
