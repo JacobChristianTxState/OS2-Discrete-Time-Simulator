@@ -8,6 +8,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 296694 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 994.57 ms.
 
 
 
@@ -18,6 +19,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297191 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 497.283 ms.
 
 
 
@@ -28,6 +30,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297357 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 331.526 ms.
 
 
 
@@ -38,6 +41,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297439 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 248.642 ms.
 
 
 
@@ -48,6 +52,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297491 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 198.913 ms.
 
 
 
@@ -58,6 +63,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297523 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 165.764 ms.
 
 
 
@@ -68,6 +74,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297548 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 142.085 ms.
 
 
 
@@ -78,6 +85,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297565 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 124.32 ms.
 
 
 
@@ -88,6 +96,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297575 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 110.51 ms.
 
 
 
@@ -98,6 +107,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297589 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 99.4578 ms.
 
 
 
@@ -108,6 +118,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297598 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 90.4157 ms.
 
 
 
@@ -118,6 +129,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297603 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 82.8785 ms.
 
 
 
@@ -128,6 +140,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297611 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 76.5051 ms.
 
 
 
@@ -138,6 +151,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297620 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 71.0347 ms.
 
 
 
@@ -148,6 +162,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297623 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 66.3008 ms.
 
 
 
@@ -158,6 +173,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297625 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 62.156 ms.
 
 
 
@@ -168,6 +184,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297628 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 58.5061 ms.
 
 
 
@@ -178,6 +195,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297633 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 55.2523 ms.
 
 
 
@@ -188,6 +206,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297636 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 52.3495 ms.
 
 
 
@@ -198,6 +217,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297641 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 49.7278 ms.
 
 
 
@@ -208,6 +228,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297640 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 47.3611 ms.
 
 
 
@@ -218,6 +239,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297646 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 45.2079 ms.
 
 
 
@@ -228,6 +250,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297646 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 43.2438 ms.
 
 
 
@@ -238,6 +261,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297651 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 41.4366 ms.
 
 
 
@@ -248,6 +272,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297645 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 39.7841 ms.
 
 
 
@@ -258,6 +283,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297653 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 38.2542 ms.
 
 
 
@@ -268,6 +294,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297658 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 36.835 ms.
 
 
 
@@ -278,6 +305,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297651 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 35.522 ms.
 
 
 
@@ -288,6 +316,7 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297648 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 34.2918 ms.
 
 
 
@@ -298,3 +327,4 @@ Average CPU Utilization : 100 percent.
      Average Throughput : 16.795 process/sec. 
 Average Turnaround Time : 297660 ms.
        Final Clock Time : 595415 ms.
+   Average Arrival Time : 33.1471 ms.

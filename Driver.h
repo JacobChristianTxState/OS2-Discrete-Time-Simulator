@@ -22,7 +22,7 @@ class Driver {
       Process createProcess();
 
     public:
-      double averageArrivalTime;
+      double averageArrivalTime = 0.0;
       Driver(DistributionGenerator, DistributionGenerator);
       void run();
       void init();
@@ -45,6 +45,7 @@ class Driver {
       int returnClock();
       void displayList();
       bool compareTimes();
+      float generateAverageArrivalTime();
 
 
 };

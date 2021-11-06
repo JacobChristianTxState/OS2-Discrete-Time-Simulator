@@ -4,19 +4,19 @@
 class Process2 {
     private:
         int totalNumOfProcesses;
-        unsigned long arrivalTime = 0;
-        unsigned long serviceTime = 0;
-        unsigned long startTime = 0;
-        unsigned long endTime = 0;
+        float arrivalTime = 0;
+        float serviceTime = 0;
+        float startTime = 0;
+        float endTime = 0;
     
     public:
         Process2(int at, int st) : arrivalTime(at), serviceTime(st) {}
-        unsigned long getArrivalTime();
-        unsigned long getServiceTime();
-        unsigned long getStartTime();
-        unsigned long getEndTime();
-        void setStartTime(unsigned long startTime);
-        void setEndTime(unsigned long endTime);
+        float getArrivalTime();
+        float getServiceTime();
+        float getStartTime();
+        float getEndTime();
+        void setStartTime(float startTime);
+        void setEndTime(float endTime);
 };
 
 #endif //process 2

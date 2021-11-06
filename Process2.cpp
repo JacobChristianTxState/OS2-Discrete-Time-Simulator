@@ -1,25 +1,25 @@
 #include "Process2.h"
 
-void Process2::setStartTime(unsigned long startTime) {
+void Process2::setStartTime(float startTime) {
     this->startTime = startTime;
 }
 
-void Process2::setEndTime(unsigned long endTime) {
+void Process2::setEndTime(float endTime) {
     this->endTime = endTime;
 }
 
-unsigned long Process2::getStartTime() {
+float Process2::getStartTime() {
     return this->startTime;
 }
 
-unsigned long Process2::getEndTime() {
+float Process2::getEndTime() {
     return this->endTime;
 }
 
-unsigned long Process2::getArrivalTime() {
+float Process2::getArrivalTime() {
     return this->arrivalTime;
 }
 
-unsigned long Process2::getServiceTime() {
+float Process2::getServiceTime() {
     return this->serviceTime;
 }

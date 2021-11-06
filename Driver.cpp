@@ -49,6 +49,7 @@ void Driver::runSimulationStatistics() {
     float processTurnAroundTime = process.getEndTime() - process.getArrivalTime();
     this->totalTurnAroundTime += processTurnAroundTime;
     this->totalWorkDone += process.getServiceTime();
+    this->averageArrivalTime += process.getArrivalTime();
   }
 }
 
@@ -78,6 +79,11 @@ float Driver::generateCpuUitilization() {
 float Driver::generateThroughput() {
   return ((float)this->numOfProcesses / (float)this->clock) * 1000;
 }
+
+float Driver::generateAverageArrivalTime() {
+  return this->averageArrivalTime / this->numOfProcesses;
+}
+
 Driver::Driver(DistributionGenerator arrivalTime, DistributionGenerator serviceTime) : 
 arrivalTime(arrivalTime), serviceTime(serviceTime) {
   this->averageArrivalTime = 0.0;

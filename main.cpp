@@ -12,13 +12,15 @@ int main(int argc, char *argv[]) {
 
     Driver driver(arrivalTime, serviceTime);
     driver.init();
+    //driver.displayList();
+
     driver.run();
-    driver.displayList();
     driver.runSimulationStatistics();
     std::cout << "\n\nAverage CPU Utilization : " << driver.generateCpuUitilization() << " percent.\n";
     std::cout << "     Average Throughput : " << driver.generateThroughput() << " process/sec. \n";
     std::cout << "Average Turnaround Time : " << driver.generateAverageTurnaroundTime() << " ms.\n";
     std::cout << "       Final Clock Time : " << driver.returnClock() << " ms.\n";
+    std::cout << "   Average Arrival Time : " << driver.generateAverageArrivalTime() << " ms.\n";
 
     return 0;
 }
