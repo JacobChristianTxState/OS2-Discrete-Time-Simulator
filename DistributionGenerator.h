@@ -3,6 +3,9 @@
 #ifndef DISTRIBUTIONGENERATOR_
 #define DISTRIBUTIONGENERATOR_
 
+#define ARR 1
+#define DEP 2
+
 #include <cmath>    //for log()
 #include <cstdlib>  //for rand(), RAND_MAX
 
@@ -10,7 +13,6 @@ class DistributionGenerator {
     private:
         float lambda;
         int distributionType;
-        float min;
         float uniformRandom();
     public:
         DistributionGenerator(float lambda, int distributionType);
