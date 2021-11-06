@@ -17,7 +17,7 @@ class Driver {
       DistributionGenerator serviceTime;
       std::vector<Process> processQueue;
       std::vector<Event> eventList;
-      unsigned long clock;
+      float clock;
       Process* activeProcess;
       Process createProcess();
 
@@ -32,7 +32,7 @@ class Driver {
       void departureHander(Event e);
 
       //test
-      int numOfProcesses = 10000;
+      int numOfProcesses = 25;
       float totalWorkDone;
       float totalTurnAroundTime;
 
@@ -42,9 +42,8 @@ class Driver {
       float generateAverageTurnaroundTime();
       float generateCpuUitilization();
       float generateThroughput();
-      int returnClock();
+      float returnClock();
       void displayList();
-      bool compareTimes();
       float generateAverageArrivalTime();
 
 

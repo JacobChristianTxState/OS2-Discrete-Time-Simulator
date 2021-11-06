@@ -4,327 +4,327 @@
 CURRENTLY RUNNING LAMBDA = 1
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 296694 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 994.57 ms.
+Average CPU Utilization : 72.7047 percent.
+     Average Throughput : 12.4069 process/sec. 
+Average Turnaround Time : 372.76 ms.
+       Final Clock Time : 2015 ms.
+   Average Arrival Time : 941.2 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 2
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297191 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 497.283 ms.
+Average CPU Utilization : 84.1954 percent.
+     Average Throughput : 14.3678 process/sec. 
+Average Turnaround Time : 568.28 ms.
+       Final Clock Time : 1740 ms.
+   Average Arrival Time : 470.68 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 3
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297357 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 331.526 ms.
+Average CPU Utilization : 88.8956 percent.
+     Average Throughput : 15.1699 process/sec. 
+Average Turnaround Time : 633.28 ms.
+       Final Clock Time : 1648 ms.
+   Average Arrival Time : 313.68 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 4
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297439 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 248.642 ms.
+Average CPU Utilization : 91.3911 percent.
+     Average Throughput : 15.5958 process/sec. 
+Average Turnaround Time : 666.64 ms.
+       Final Clock Time : 1603 ms.
+   Average Arrival Time : 235.32 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 5
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297491 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 198.913 ms.
+Average CPU Utilization : 93.0159 percent.
+     Average Throughput : 15.873 process/sec. 
+Average Turnaround Time : 685.52 ms.
+       Final Clock Time : 1575 ms.
+   Average Arrival Time : 188.16 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 6
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297523 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 165.764 ms.
+Average CPU Utilization : 94.0912 percent.
+     Average Throughput : 16.0565 process/sec. 
+Average Turnaround Time : 698.72 ms.
+       Final Clock Time : 1557 ms.
+   Average Arrival Time : 156.96 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 7
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297548 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 142.085 ms.
+Average CPU Utilization : 94.8834 percent.
+     Average Throughput : 16.1917 process/sec. 
+Average Turnaround Time : 708.2 ms.
+       Final Clock Time : 1544 ms.
+   Average Arrival Time : 134.48 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 8
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297565 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 124.32 ms.
+Average CPU Utilization : 95.502 percent.
+     Average Throughput : 16.2973 process/sec. 
+Average Turnaround Time : 715.08 ms.
+       Final Clock Time : 1534 ms.
+   Average Arrival Time : 117.6 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 9
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297575 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 110.51 ms.
+Average CPU Utilization : 96.0026 percent.
+     Average Throughput : 16.3827 process/sec. 
+Average Turnaround Time : 720 ms.
+       Final Clock Time : 1526 ms.
+   Average Arrival Time : 104.68 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 10
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297589 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 99.4578 ms.
+Average CPU Utilization : 96.3816 percent.
+     Average Throughput : 16.4474 process/sec. 
+Average Turnaround Time : 724.88 ms.
+       Final Clock Time : 1520 ms.
+   Average Arrival Time : 94.08 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 11
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297598 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 90.4157 ms.
+Average CPU Utilization : 96.6997 percent.
+     Average Throughput : 16.5016 process/sec. 
+Average Turnaround Time : 728.36 ms.
+       Final Clock Time : 1515 ms.
+   Average Arrival Time : 85.6 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 12
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297603 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 82.8785 ms.
+Average CPU Utilization : 96.9557 percent.
+     Average Throughput : 16.5453 process/sec. 
+Average Turnaround Time : 731.52 ms.
+       Final Clock Time : 1511 ms.
+   Average Arrival Time : 78.44 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 13
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297611 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 76.5051 ms.
+Average CPU Utilization : 97.213 percent.
+     Average Throughput : 16.5893 process/sec. 
+Average Turnaround Time : 733.36 ms.
+       Final Clock Time : 1507 ms.
+   Average Arrival Time : 72.32 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 14
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297620 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 71.0347 ms.
+Average CPU Utilization : 97.4069 percent.
+     Average Throughput : 16.6223 process/sec. 
+Average Turnaround Time : 735.8 ms.
+       Final Clock Time : 1504 ms.
+   Average Arrival Time : 67.28 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 15
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297623 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 66.3008 ms.
+Average CPU Utilization : 97.5366 percent.
+     Average Throughput : 16.6445 process/sec. 
+Average Turnaround Time : 738.04 ms.
+       Final Clock Time : 1502 ms.
+   Average Arrival Time : 62.64 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 16
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297625 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 62.156 ms.
+Average CPU Utilization : 97.7318 percent.
+     Average Throughput : 16.6778 process/sec. 
+Average Turnaround Time : 738.8 ms.
+       Final Clock Time : 1499 ms.
+   Average Arrival Time : 58.88 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 17
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297628 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 58.5061 ms.
+Average CPU Utilization : 97.8624 percent.
+     Average Throughput : 16.7001 process/sec. 
+Average Turnaround Time : 740.48 ms.
+       Final Clock Time : 1497 ms.
+   Average Arrival Time : 55.32 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 18
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297633 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 55.2523 ms.
+Average CPU Utilization : 97.9278 percent.
+     Average Throughput : 16.7112 process/sec. 
+Average Turnaround Time : 742.56 ms.
+       Final Clock Time : 1496 ms.
+   Average Arrival Time : 52.24 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 19
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297636 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 52.3495 ms.
+Average CPU Utilization : 98.0589 percent.
+     Average Throughput : 16.7336 process/sec. 
+Average Turnaround Time : 743.24 ms.
+       Final Clock Time : 1494 ms.
+   Average Arrival Time : 49.56 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 20
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297641 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 49.7278 ms.
+Average CPU Utilization : 98.1246 percent.
+     Average Throughput : 16.7448 process/sec. 
+Average Turnaround Time : 744.68 ms.
+       Final Clock Time : 1493 ms.
+   Average Arrival Time : 47.12 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 21
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297640 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 47.3611 ms.
+Average CPU Utilization : 98.2562 percent.
+     Average Throughput : 16.7673 process/sec. 
+Average Turnaround Time : 745.36 ms.
+       Final Clock Time : 1491 ms.
+   Average Arrival Time : 44.8 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 22
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297646 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 45.2079 ms.
+Average CPU Utilization : 98.3221 percent.
+     Average Throughput : 16.7785 process/sec. 
+Average Turnaround Time : 746.28 ms.
+       Final Clock Time : 1490 ms.
+   Average Arrival Time : 42.84 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 23
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297646 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 43.2438 ms.
+Average CPU Utilization : 98.3882 percent.
+     Average Throughput : 16.7898 process/sec. 
+Average Turnaround Time : 747.24 ms.
+       Final Clock Time : 1489 ms.
+   Average Arrival Time : 40.92 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 24
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297651 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 41.4366 ms.
+Average CPU Utilization : 98.4543 percent.
+     Average Throughput : 16.8011 process/sec. 
+Average Turnaround Time : 747.88 ms.
+       Final Clock Time : 1488 ms.
+   Average Arrival Time : 39.24 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 25
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297645 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 39.7841 ms.
+Average CPU Utilization : 98.5205 percent.
+     Average Throughput : 16.8124 process/sec. 
+Average Turnaround Time : 748.44 ms.
+       Final Clock Time : 1487 ms.
+   Average Arrival Time : 37.68 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 26
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297653 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 38.2542 ms.
+Average CPU Utilization : 98.5868 percent.
+     Average Throughput : 16.8237 process/sec. 
+Average Turnaround Time : 748.84 ms.
+       Final Clock Time : 1486 ms.
+   Average Arrival Time : 36.28 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 27
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297658 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 36.835 ms.
+Average CPU Utilization : 98.6532 percent.
+     Average Throughput : 16.835 process/sec. 
+Average Turnaround Time : 748.88 ms.
+       Final Clock Time : 1485 ms.
+   Average Arrival Time : 34.92 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 28
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297651 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 35.522 ms.
+Average CPU Utilization : 98.6532 percent.
+     Average Throughput : 16.835 process/sec. 
+Average Turnaround Time : 750.16 ms.
+       Final Clock Time : 1485 ms.
+   Average Arrival Time : 33.64 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 29
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297648 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 34.2918 ms.
+Average CPU Utilization : 98.7197 percent.
+     Average Throughput : 16.8464 process/sec. 
+Average Turnaround Time : 750.68 ms.
+       Final Clock Time : 1484 ms.
+   Average Arrival Time : 32.44 ms.
 
 
 
 CURRENTLY RUNNING LAMBDA = 30
 
 
-Average CPU Utilization : 100 percent.
-     Average Throughput : 16.795 process/sec. 
-Average Turnaround Time : 297660 ms.
-       Final Clock Time : 595415 ms.
-   Average Arrival Time : 33.1471 ms.
+Average CPU Utilization : 98.7862 percent.
+     Average Throughput : 16.8577 process/sec. 
+Average Turnaround Time : 750.76 ms.
+       Final Clock Time : 1483 ms.
+   Average Arrival Time : 31.4 ms.

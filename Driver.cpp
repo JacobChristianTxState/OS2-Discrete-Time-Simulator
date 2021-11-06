@@ -3,8 +3,8 @@
 #include <algorithm>
 
 void Driver::init() {
-  this->clock = 0;
   generateProcesses();
+  this->clock = 0.0;
   std::sort(process2Queue.begin(), process2Queue.end(), 
     [](Process2 p1, Process2 p2)  {
         return p1.getArrivalTime() < p2.getArrivalTime();
@@ -15,7 +15,6 @@ void Driver::init() {
   process2Queue.front().setEndTime(
     process2Queue.front().getArrivalTime() + process2Queue.front().getServiceTime()
   );
-  
 }
 
 void Driver::generateProcesses() {
@@ -30,6 +29,9 @@ void Driver::generateProcesses() {
 }
 
 void Driver::run() {
+    Process2* firstProcess = &process2Queue[0];
+    this->clock = firstProcess->getEndTime();
+
   for(size_t i = 1; i < process2Queue.size(); i++) {
     Process2* currentProcess = &process2Queue[i];
     Process2* previousProcess = &process2Queue[i-1];
@@ -53,17 +55,18 @@ void Driver::runSimulationStatistics() {
   }
 }
 
-int Driver::returnClock() {
+float Driver::returnClock() {
   return this->clock;
 }
 
 void Driver::displayList() {
   for (size_t i = 0; i < process2Queue.size(); i++) {
     std::cout << "Process " << i << ":\n";
-    std::cout << "\n\tArrival Time: " << process2Queue[i].getArrivalTime();
-    std::cout << "\n\tService Time: " << process2Queue[i].getServiceTime();
-    std::cout << "\n\t  Start Time: " << process2Queue[i].getStartTime();
-    std::cout << "\n\t    End Time: " << process2Queue[i].getEndTime();
+    std::cout << "\n\t   Arrival Time : " << process2Queue[i].getArrivalTime();
+    std::cout << "\n\t   Service Time : " << process2Queue[i].getServiceTime();
+    std::cout << "\n\t     Start Time : " << process2Queue[i].getStartTime();
+    std::cout << "\n\t       End Time : " << process2Queue[i].getEndTime();
+    std::cout << "\n\tTurnaround Time : " << process2Queue[i].getEndTime() - process2Queue[i].getArrivalTime();
     std::cout << "\n\n";
   }
 }
@@ -77,7 +80,7 @@ float Driver::generateCpuUitilization() {
 }
 
 float Driver::generateThroughput() {
-  return ((float)this->numOfProcesses / (float)this->clock) * 1000;
+  return ((float)this->numOfProcesses / this->clock) * 1000;
 }
 
 float Driver::generateAverageArrivalTime() {
@@ -87,6 +90,8 @@ float Driver::generateAverageArrivalTime() {
 Driver::Driver(DistributionGenerator arrivalTime, DistributionGenerator serviceTime) : 
 arrivalTime(arrivalTime), serviceTime(serviceTime) {
   this->averageArrivalTime = 0.0;
+  this->totalTurnAroundTime = 0.0;
+  this->totalWorkDone = 0.0;
 }
 
 // void Driver::init() {

@@ -7,14 +7,13 @@
 int main(int argc, char *argv[]) {
 
     std::cout << "\n\n\nCURRENTLY RUNNING LAMBDA = " << argv[2] << "\n";
-    DistributionGenerator arrivalTime(atoi(argv[2]), ARR);
+    DistributionGenerator arrivalTime(atof(argv[2]), ARR);
     DistributionGenerator serviceTime(1/atof(argv[3]), DEP);
 
     Driver driver(arrivalTime, serviceTime);
     driver.init();
-    //driver.displayList();
-
     driver.run();
+    //driver.displayList();
     driver.runSimulationStatistics();
     std::cout << "\n\nAverage CPU Utilization : " << driver.generateCpuUitilization() << " percent.\n";
     std::cout << "     Average Throughput : " << driver.generateThroughput() << " process/sec. \n";
