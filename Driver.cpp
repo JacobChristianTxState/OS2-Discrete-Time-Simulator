@@ -1,6 +1,6 @@
 #include "Driver.h"
 
-Driver::Driver(float lambda1, float lambda2, int a_id, float quantum):serviceTime(1/lambda1), arrivalTime(lambda2){
+Driver::Driver(float lambda1, float lambda2, int a_id, float quantum):serviceTime(1/lambda1, 2), arrivalTime(lambda2, 1){
   algorithm_id = a_id;
   serveridle = true;
   this->quantum = quantum;
@@ -26,12 +26,10 @@ void Driver::run(){
 
 void Driver::handleEvent(){
 //handling arrival
-clock = eventList[0].getTime();
-if(eventList[0].getType()){
-  std::cout << "Arrival at Time: " << clock << "\n-----------\n";
-  handleArr();
-}else{
-  std::cout << "Departure at Time: " << clock << "\n-----------\n";
+  clock = eventList[0].getTime();
+  if(eventList[0].getType()){
+    handleArr();
+  }else{
     handleDep();
   }
   eventList.erase(eventList.begin());
@@ -58,9 +56,9 @@ void Driver::handleDep(){
   if(processReadyQueue.empty()){
     serveridle = true;
   }else{
+    processReadyQueue.erase(processReadyQueue.begin());
     Event dep = Event(clock + calcProcessTime(), false);
     scheduleEvent(dep);
-    processReadyQueue.erase(processReadyQueue.begin());
   }
 }
 
