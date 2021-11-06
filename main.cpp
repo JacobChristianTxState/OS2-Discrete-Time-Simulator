@@ -4,7 +4,8 @@
 #include "Process.h"
 
 int main(){
-  DistributionGenerator gen = DistributionGenerator(1);
-  Driver driver = Driver(1, 1, 2);
+  Driver driver = Driver(.06, 1, 1, 2);
   driver.run();
+  std::cout << "Out of Run\n";
+  return 0;
 }
