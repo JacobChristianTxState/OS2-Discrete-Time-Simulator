@@ -3,17 +3,20 @@
 #ifndef DISTRIBUTIONGENERATOR_
 #define DISTRIBUTIONGENERATOR_
 
-#include <cmath>    //for std::round()
+#define ARR 1
+#define DEP 2
+
+#include <cmath>    //for log()
 #include <cstdlib>  //for rand(), RAND_MAX
 
 class DistributionGenerator {
     private:
         float lambda;
+        int distributionType;
         float uniformRandom();
     public:
-        DistributionGenerator(float lambda);
+        DistributionGenerator(float lambda, int distributionType);
         float generateExponentialDist();
-        DistributionGenerator operator= (const DistributionGenerator&);
 };
 
 #endif //DISTRIBUTIONGENERATOR_
