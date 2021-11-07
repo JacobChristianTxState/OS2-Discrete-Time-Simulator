@@ -4,7 +4,7 @@ rm sim-1.data
 rm test.txt
 
 touch sim-1.data
-echo "Lambda,Average Throughput, Cpu Utilization" >> sim-1.data
+echo "Lambda,Average Throughput,Average Turnaround Time,Cpu Utilization" >> sim-1.data
 
 make
 for ((i = 1; i <= 30; i++)); do  

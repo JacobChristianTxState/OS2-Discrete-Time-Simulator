@@ -3,6 +3,10 @@
 StatisticDriver::StatisticDriver() {
     this->lambda = arrivalLambda;
     std::cout << "Arrival Lambda: " << this->lambda << "\n";
+    this->accumulatingTurnaroundTime = 0.0;
+    this->accumulatingWaitingTime = 0.0;
+    this->accumulatingWorkTime = 0.0;
+    this->simulatorClock = 0.0;
 }
 
 void StatisticDriver::incrementWorkTime(float work) {
@@ -22,7 +26,7 @@ void StatisticDriver::incrementWaitingTime(float waitingTime) {
 }
 
 float StatisticDriver:: getAverageWaitingTime() {
-    return this->accumulatingWaitingTime / PROCESSES;
+    return this->accumulatingWaitingTime / PROCESSCOUNT;
 }
 
 float StatisticDriver::getCpuUitlization() {
@@ -30,7 +34,7 @@ float StatisticDriver::getCpuUitlization() {
 }
 
 float StatisticDriver::getAverageTurnaroundTime() {
-    return this->accumulatingTurnaroundTime / PROCESSES;
+    return this->accumulatingTurnaroundTime / PROCESSCOUNT;
 }
 
 float StatisticDriver::getAverageQueueLength() {
@@ -38,5 +42,5 @@ float StatisticDriver::getAverageQueueLength() {
 }
 
 float StatisticDriver::getThroughput() {
-    return (PROCESSES / this->simulatorClock) * 1000;   //convert ms to sec
+    return (PROCESSCOUNT / this->simulatorClock) * 1000;   //convert ms to sec
 }

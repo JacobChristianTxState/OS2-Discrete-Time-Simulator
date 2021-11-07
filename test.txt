@@ -3,208 +3,208 @@ Arrival Lambda: 1
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 9.20274e+06
+			Final time: 9.20265e+06
 
 Arrival Lambda: 2
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 4.60138e+06
+			Final time: 4.60134e+06
 
 Arrival Lambda: 3
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 3.06762e+06
+			Final time: 3.06759e+06
 
 Arrival Lambda: 4
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 2.30073e+06
+			Final time: 2.3007e+06
 
 Arrival Lambda: 5
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 1.84056e+06
+			Final time: 1.84054e+06
 
 Arrival Lambda: 6
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 1.53426e+06
+			Final time: 1.5338e+06
 
 Arrival Lambda: 7
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 1.31457e+06
+			Final time: 1.31473e+06
 
 Arrival Lambda: 8
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 1.14822e+06
+			Final time: 1.15042e+06
 
 Arrival Lambda: 9
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 1.02211e+06
+			Final time: 1.02257e+06
 
 Arrival Lambda: 10
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 920387
+			Final time: 920315
 
 Arrival Lambda: 11
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 836715
+			Final time: 836686
 
 Arrival Lambda: 12
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 767114
+			Final time: 766983
 
 Arrival Lambda: 13
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 705606
+			Final time: 707985
 
 Arrival Lambda: 14
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 655927
+			Final time: 657429
 
 Arrival Lambda: 15
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 614328
+			Final time: 613654
 
 Arrival Lambda: 16
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599169
+			Final time: 599404
 
 Arrival Lambda: 17
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599402
+			Final time: 599375
 
 Arrival Lambda: 18
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599167
+			Final time: 599350
 
 Arrival Lambda: 19
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599058
+			Final time: 599308
 
 Arrival Lambda: 20
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599215
+			Final time: 599300
 
 Arrival Lambda: 21
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599077
+			Final time: 599291
 
 Arrival Lambda: 22
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599045
+			Final time: 599327
 
 Arrival Lambda: 23
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599160
+			Final time: 599326
 
 Arrival Lambda: 24
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599182
+			Final time: 599324
 
 Arrival Lambda: 25
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599240
+			Final time: 599323
 
 Arrival Lambda: 26
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599097
+			Final time: 599322
 
 Arrival Lambda: 27
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599025
+			Final time: 599321
 
 Arrival Lambda: 28
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599153
+			Final time: 599320
 
 Arrival Lambda: 29
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599189
+			Final time: 599319
 
 Arrival Lambda: 30
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
 	Total events: 20000
-			Final time: 599181
+			Final time: 599318
 
