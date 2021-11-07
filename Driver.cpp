@@ -28,8 +28,10 @@ void Driver::handleEvent(){
 //handling arrival
   clock = eventList[0].getTime();
   if(eventList[0].getType()){
+    std::cout << "Handling Arrival Clock: " << clock << "\n------\n";
     handleArr();
   }else{
+    std::cout << "Handling Departure Clock: " << clock << "\n------\n";
     handleDep();
   }
   eventList.erase(eventList.begin());
@@ -37,13 +39,13 @@ void Driver::handleEvent(){
 
 void Driver::handleArr(){
   float arrTime = arrivalTime.generateExponentialDist();
+  Process p = Process(pid, clock + arrTime, this->serviceTime.generateExponentialDist(), 0);
   if(serveridle == true){
     serveridle = false;
     float duh = clock + calcProcessTime();
     Event dep = Event(duh, false);
     scheduleEvent(dep);
   }else{
-    Process p = Process(pid, clock + arrTime, serviceTime.generateExponentialDist(), 0);
     pid++;
     //scheduleProcess
     scheduleProcess(p);
@@ -73,7 +75,6 @@ float Driver::calcProcessTime(){
     default:
       this -> process_count++;
       float t = processReadyQueue[0].getRemainingServiceTime();
-      processReadyQueue.erase(processReadyQueue.begin());
       return t;
       break;
   }
@@ -94,7 +95,7 @@ void Driver::scheduleEvent(Event e){
   if(eventList.size() > 1){
     std::sort(eventList.begin(), eventList.end(), [](Event &E1, Event &E2){return E1.getTime()<E2.getTime();});
   }
-  printList();
+  //printList();
 }
 
 void Driver::printList(){
