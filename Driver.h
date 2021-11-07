@@ -7,6 +7,9 @@
 #include <algorithm>
 #include <iostream>
 
+#define ARR 1
+#define DEP 2
+
 class Driver{
   private:
     bool serveridle;
