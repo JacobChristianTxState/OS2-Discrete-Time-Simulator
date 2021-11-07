@@ -1,27 +1,27 @@
-#include "Logger.h"
+#include "SimulatorLogger.h"
 
-Logger::Logger() {   
+SimulatorLogger::SimulatorLogger() {   
     this->fileName = CreateDefaultFileName(); 
 }
 
-std::string Logger::CreateDefaultFileName(){
+std::string SimulatorLogger::CreateDefaultFileName(){
     return "sim.data";
 }
 
-void Logger::OpenFile() {
+void SimulatorLogger::OpenFile() {
     this->fileStream.open(this->fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
 }
 
-void Logger::CloseFile() {
+void SimulatorLogger::CloseFile() {
     this->fileStream.close();
 }
 
-bool Logger::FileIsOpen() {
+bool SimulatorLogger::FileIsOpen() {
     return fileStream.is_open();
 }
 
-void Logger::WriteToFile(std::string outStream) {
-    if (Logger::FileIsOpen()) {
+void SimulatorLogger::WriteToFile(std::string outStream) {
+    if (SimulatorLogger::FileIsOpen()) {
         //if new line character is not found at end of string, add it
         if (outStream.find("\n") == std::string::npos) {
             outStream += "\n";
@@ -30,8 +30,8 @@ void Logger::WriteToFile(std::string outStream) {
     }
 }
 
-void Logger::ReadFromFile() {
-    if (Logger::FileIsOpen()) {
+void SimulatorLogger::ReadFromFile() {
+    if (SimulatorLogger::FileIsOpen()) {
         //return to the beginning of the file
         fileStream.clear();
         fileStream.seekg(0);
@@ -43,3 +43,4 @@ void Logger::ReadFromFile() {
         fileStream.clear();
         fileStream.seekg(0);
     }
+}

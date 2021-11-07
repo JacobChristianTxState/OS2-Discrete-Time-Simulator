@@ -4,16 +4,16 @@
 #include <string>
 #include <fstream>
 #include <iostream>
-#include <ctime>
 
 
-class Logger {
+class SimulatorLogger {
     private:
         std::string fileName;
         std::fstream fileStream;
         std::string CreateDefaultFileName();
+        float totalWorkTime;
     public:
-        Logger();
+        SimulatorLogger();
         void OpenFile();
         void CloseFile();
         bool FileIsOpen();

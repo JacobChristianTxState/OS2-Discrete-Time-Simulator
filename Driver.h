@@ -4,6 +4,8 @@
 #include "DistributionGenerator.h"
 #include "Event.h"
 #include "Process.h"
+#include "SimulatorLogger.h"
+#include "StatisticDriver.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -11,12 +13,14 @@
 
 #define ARR 1
 #define DEP 2
-#define PROCESSES 5
+#define PROCESSES 10000
 
 class Driver{
   private:
     DistributionGenerator arrivalTime;
     DistributionGenerator serviceTime;
+    SimulatorLogger logger;
+    StatisticDriver stats;
     std::vector<Event> eventQueue;
     bool serverIdle;
     int readyQueueCount;
