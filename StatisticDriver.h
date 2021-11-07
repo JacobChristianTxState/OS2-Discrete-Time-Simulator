@@ -3,9 +3,9 @@
 
 #include <iostream>
 
-#define PROCESSES 10000
-extern float arrivalLambda; //from main.cpp
-
+//from main.cpp
+extern const int PROCESSCOUNT;
+extern float arrivalLambda; 
 
 class StatisticDriver {
     private:

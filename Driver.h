@@ -13,8 +13,9 @@
 #include <string>
 #include <sstream>
 
+//from main.cpp
 extern const int PROCESSCOUNT;
-extern float arrivalLambda; //from main.cpp
+extern float arrivalLambda; 
 
 class Driver{
   private:
@@ -23,6 +24,8 @@ class Driver{
     SimulatorLogger logger;
     StatisticDriver stats;
     std::vector<Event> eventQueue;
+    std::vector<Process> processReadyQueue;
+    Process* currentlyRunningProcess;
     bool serverIdle;
     int readyQueueCount;
     int totalProcesses = 0;
@@ -42,6 +45,7 @@ class Driver{
     int getReadyQueueCount();
     bool getServerIdleStatus();
     void printEvents();
+    void printProcessReadyQueue();
     void printEvent(Event e);
 
 };
