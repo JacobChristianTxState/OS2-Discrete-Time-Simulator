@@ -23,7 +23,7 @@ void Driver::init() {
   //std::cout << "\n";
   this->totalProcesses++;
   this->totalArrivals++;
-  scheduleEvent(ARR, initialArrivalTime);
+  scheduleEvent(eventTypeEnums::ARR, initialArrivalTime);
 }
 
 void Driver::run() {
@@ -35,11 +35,11 @@ void Driver::run() {
     //std::cout << "(run) Current event in run: ";
     printEvent(e);
     switch(e.getType()) {
-      case ARR:
+      case eventTypeEnums::ARR:
         //std::cout << "\t(run, arr) Handling arrival...\n\n";
         arriveHandler(e);
         break;
-      case DEP: 
+      case eventTypeEnums::DEP: 
         //std::cout << "\t(run, dep) Handling departure...\n\n";
         departureHander(e);
         break;
@@ -67,7 +67,7 @@ void Driver::arriveHandler(Event e) {
     // std::cout << "\t\t(arr, serverIdle) Next departure will happen at time: " << this->clock + nextServiceTime << "\n\n";
     // std::cout << "\t\t(arr, serverIdle) Next departure takes a total of   : " << nextServiceTime << "\n\n";
 
-    scheduleEvent(DEP, this->clock + nextServiceTime);
+    scheduleEvent(eventTypeEnums::DEP, this->clock + nextServiceTime);
     stats.incrementWorkTime(nextServiceTime);
     this->totalDepartures++;
     // std::cout << "\t\t(arr, serverIdle) Current event queue: ";
@@ -81,7 +81,7 @@ void Driver::arriveHandler(Event e) {
     float nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
     // std::cout << "\t\t(arr) Next arrival will happen at time: " << this->clock + nextArrivalTime << "\n\n";
     // std::cout << "\t\t(arr) Next departure takes a total of   : " << nextArrivalTime << "\n\n";
-    scheduleEvent(ARR, this->clock + nextArrivalTime);
+    scheduleEvent(eventTypeEnums::ARR, this->clock + nextArrivalTime);
     this->totalProcesses++;
     this->totalArrivals++;
     // std::cout << "\t\t(arr) Current event queue: ";
@@ -100,7 +100,7 @@ void Driver::departureHander(Event e) {
     float nextServiceTime = std::round(this->serviceTime.generateExponentialDist());
     // std::cout << "\t\t (dep) Next departure will happen at time: " << this->clock + nextServiceTime << "\n";
     // std::cout << "\t\t (dep) Next departure takes a total of   : " << nextServiceTime << "\n\n";
-    scheduleEvent(DEP, this->clock + nextServiceTime);
+    scheduleEvent(eventTypeEnums::ARR, this->clock + nextServiceTime);
     stats.incrementWorkTime(nextServiceTime);
     this->totalDepartures++;
     // std::cout << "\t\t(dep) Current event queue: ";
