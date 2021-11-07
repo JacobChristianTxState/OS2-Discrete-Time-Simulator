@@ -31,6 +31,7 @@ void Driver::run() {
   while(totalProcesses < PROCESSES || eventQueue.size() > 0){//} || !this->eventQueue.empty()) {  //run for 10 processes
     Event e = eventQueue[0];
     this->clock = e.getTime();
+    stats.incrementClock(getClock());
     //std::cout << "(run) Current event in run: ";
     printEvent(e);
     switch(e.getType()) {
@@ -52,8 +53,9 @@ void Driver::run() {
   std::cout << "\tTotal departures: " << this->totalDepartures << "\n";
   std::cout << "\tTotal processes: " << this->totalProcesses << "\n";
   std::cout << "\tTotal events: " << this->eventCount << "\n";
-  float throughput  = (PROCESSES * 1000 / this->clock); 
-  this->logger.WriteToFile(std::to_string(throughput));
+  std::stringstream ss;
+  ss << std::to_string(arrivalLambda) << "," << std::to_string(stats.getThroughput()) << "," << std::to_string(stats.getCpuUitlization());
+  this->logger.WriteToFile(ss.str());
   this->logger.CloseFile();
 
 }
@@ -66,6 +68,7 @@ void Driver::arriveHandler(Event e) {
     // std::cout << "\t\t(arr, serverIdle) Next departure takes a total of   : " << nextServiceTime << "\n\n";
 
     scheduleEvent(DEP, this->clock + nextServiceTime);
+    stats.incrementWorkTime(nextServiceTime);
     this->totalDepartures++;
     // std::cout << "\t\t(arr, serverIdle) Current event queue: ";
     printEvents();
@@ -98,6 +101,7 @@ void Driver::departureHander(Event e) {
     // std::cout << "\t\t (dep) Next departure will happen at time: " << this->clock + nextServiceTime << "\n";
     // std::cout << "\t\t (dep) Next departure takes a total of   : " << nextServiceTime << "\n\n";
     scheduleEvent(DEP, this->clock + nextServiceTime);
+    stats.incrementWorkTime(nextServiceTime);
     this->totalDepartures++;
     // std::cout << "\t\t(dep) Current event queue: ";
     printEvents();

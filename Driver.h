@@ -10,10 +10,13 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
+#include <sstream>
 
 #define ARR 1
 #define DEP 2
 #define PROCESSES 10000
+
+extern float arrivalLambda; //from main.cpp
 
 class Driver{
   private:

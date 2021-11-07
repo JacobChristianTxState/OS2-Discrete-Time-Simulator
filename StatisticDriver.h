@@ -4,7 +4,7 @@
 #include <iostream>
 
 #define PROCESSES 10000
-extern float arrivalLambda;
+extern float arrivalLambda; //from main.cpp
 
 
 class StatisticDriver {
@@ -24,6 +24,7 @@ class StatisticDriver {
         float getCpuUitlization();
         float getAverageTurnaroundTime();
         float getAverageQueueLength();
+        float getThroughput();
 };
 
 #endif //STATISTICDRIVER_

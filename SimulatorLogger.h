@@ -11,7 +11,6 @@ class SimulatorLogger {
         std::string fileName;
         std::fstream fileStream;
         std::string CreateDefaultFileName();
-        float totalWorkTime;
     public:
         SimulatorLogger();
         void OpenFile();
