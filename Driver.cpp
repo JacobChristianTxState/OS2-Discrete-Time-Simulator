@@ -1,108 +1,144 @@
 #include "Driver.h"
 
-Driver::Driver(float lambda1, float lambda2, int a_id, float quantum):serviceTime(1/lambda1, DEP), arrivalTime(lambda2, ARR){
-  algorithm_id = a_id;
-  serveridle = true;
-  this->quantum = quantum;
-  this -> lambda = lambda1;
-  int pid = 0;
-  process_count = 0;
-  float aT = arrivalTime.generateExponentialDist();
-  Process p = Process(0, aT, serviceTime.generateExponentialDist(), 0);
-  processReadyQueue.push_back(p);
-  Event e = Event(aT, true);
-  eventList.push_back(e);
-  clock = 0;
+Driver::Driver(DistributionGenerator at, DistributionGenerator st) : arrivalTime(at), serviceTime(st) {}
+
+void Driver::scheduleEvent(int eventType, float time) {
+  Event event(time, eventType);
+  this->eventCount++;
+  std::cout << "\t\t\t(schedule) Creating the following event: ";
+  printEvent(event);
+  eventQueue.push_back(event);
+  std::sort(
+    eventQueue.begin(), 
+    eventQueue.end(),
+    [](Event& e1, Event& e2) -> bool {return e1.getTime() < e2.getTime();});
 }
 
-void Driver::run(){
-  //for(int i = 0; i != 30; i++){
-    process_count = 0;
-    while(process_count <= 10){
-      handleEvent();
-  }
-//}
+void Driver::init() {
+  this->clock = 0.0;
+  this->serverIdle = true;
+  this->readyQueueCount = 0;
+  float initialArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
+  std::cout << "Initial arrival time: " << initialArrivalTime << "\n";
+  std::cout << "\n";
+  this->totalProcesses++;
+  this->totalArrivals++;
+  scheduleEvent(ARR, initialArrivalTime);
 }
 
-void Driver::handleEvent(){
-//handling arrival
-clock = eventList[0].getTime();
-if(eventList[0].getType()){
-  std::cout << "Arrival at Time: " << clock << "\n-----------\n";
-  handleArr();
-}else{
-  std::cout << "Departure at Time: " << clock << "\n-----------\n";
-    handleDep();
+void Driver::run() {
+  while(totalProcesses < PROCESSES || eventQueue.size() > 0){//} || !this->eventQueue.empty()) {  //run for 10 processes
+    Event e = eventQueue[0];
+    this->clock = e.getTime();
+    std::cout << "(run) Current event in run: ";
+    printEvent(e);
+    switch(e.getType()) {
+      case ARR:
+        std::cout << "\t(run, arr) Handling arrival...\n\n";
+        arriveHandler(e);
+        break;
+      case DEP: 
+        std::cout << "\t(run, dep) Handling departure...\n\n";
+        departureHander(e);
+        break;
+    }
+    std::cout << "(run) Erasing head from queue.\n\n";
+    eventQueue.erase(eventQueue.begin());
+    std::cout << "(run) Current event queue: ";
+    printEvents();
   }
-  eventList.erase(eventList.begin());
+  std::cout << "\tTotal arrivals: " << this->totalArrivals << "\n";
+  std::cout << "\tTotal departures: " << this->totalDepartures << "\n";
+  std::cout << "\tTotal processes: " << this->totalProcesses << "\n";
+  std::cout << "\tTotal events: " << this->eventCount << "\n";
 }
 
-void Driver::handleArr(){
-  float arrTime = arrivalTime.generateExponentialDist();
-  if(serveridle == true){
-    serveridle = false;
-    float duh = clock + calcProcessTime();
-    Event dep = Event(duh, false);
-    scheduleEvent(dep);
-  }else{
-    Process p = Process(pid, clock + arrTime, serviceTime.generateExponentialDist(), 0);
-    pid++;
-    //scheduleProcess
-    scheduleProcess(p);
+void Driver::arriveHandler(Event e) {
+  if(serverIdle) {
+    serverIdle = false;
+    float nextServiceTime = std::round(this->serviceTime.generateExponentialDist());
+    std::cout << "\t\t(arr, serverIdle) Next departure will happen at time: " << this->clock + nextServiceTime << "\n\n";
+    std::cout << "\t\t(arr, serverIdle) Next departure takes a total of   : " << nextServiceTime << "\n\n";
+
+    scheduleEvent(DEP, this->clock + nextServiceTime);
+    this->totalDepartures++;
+    std::cout << "\t\t(arr, serverIdle) Current event queue: ";
+    printEvents();
+    
+  } else {
+    std::cout << "\t\t(arr) Server is currently busy, adding to back of readyQueueCount\n\n";
+    readyQueueCount++;
   }
-  Event arr = Event(clock + arrTime, true);
-  scheduleEvent(arr);
+  if (this->totalProcesses < PROCESSES) {
+    float nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
+    std::cout << "\t\t(arr) Next arrival will happen at time: " << this->clock + nextArrivalTime << "\n\n";
+    std::cout << "\t\t(arr) Next departure takes a total of   : " << nextArrivalTime << "\n\n";
+    scheduleEvent(ARR, this->clock + nextArrivalTime);
+    this->totalProcesses++;
+    this->totalArrivals++;
+    std::cout << "\t\t(arr) Current event queue: ";
+    printEvents();
+  }
+  
 }
 
-void Driver::handleDep(){
-  if(processReadyQueue.empty()){
-    serveridle = true;
-  }else{
-    Event dep = Event(clock + calcProcessTime(), false);
-    scheduleEvent(dep);
-    processReadyQueue.erase(processReadyQueue.begin());
-  }
-}
-
-float Driver::calcProcessTime(){
-  switch(algorithm_id){
-    case 3:
-      return 0.0;
-      break;
-    case 4:
-      return 0.0;
-      break;
-    default:
-      this -> process_count++;
-      float t = processReadyQueue[0].getRemainingServiceTime();
-      processReadyQueue.erase(processReadyQueue.begin());
-      return t;
-      break;
-  }
-}
-
-void Driver::scheduleProcess(Process p){
-  switch(algorithm_id){
-    case 2:
-      break;
-    default:
-      processReadyQueue.push_back(p);
-      break;
+void Driver::departureHander(Event e) {
+  if (readyQueueCount == 0) {
+    std::cout << "\t\t(dep) No processes are ready to run, server is idle.\n\n";
+    serverIdle = true;
+  } else {
+    readyQueueCount--;
+    std::cout << "\t\t (dep) Moving next process from ready queue to run.\n\n";
+    float nextServiceTime = std::round(this->serviceTime.generateExponentialDist());
+    std::cout << "\t\t (dep) Next departure will happen at time: " << this->clock + nextServiceTime << "\n";
+    std::cout << "\t\t (dep) Next departure takes a total of   : " << nextServiceTime << "\n\n";
+    scheduleEvent(DEP, this->clock + nextServiceTime);
+    this->totalDepartures++;
+    std::cout << "\t\t(dep) Current event queue: ";
+    printEvents();
   }
 }
 
-void Driver::scheduleEvent(Event e){
-  eventList.push_back(e);
-  if(eventList.size() > 1){
-    std::sort(eventList.begin(), eventList.end(), [](Event &E1, Event &E2){return E1.getTime()<E2.getTime();});
-  }
-  printList();
+float Driver::getClock() {
+  return this->clock;
 }
 
-void Driver::printList(){
-  std::cout << "Print Events\n";
-  for (auto i : eventList){
-    std::cout << i.getType() << " time: " << i.getTime() << "\n";
-  }
-  std::cout << "Events done printing\n";
+int Driver::getReadyQueueCount() {
+  return this->readyQueueCount;
 }
+
+bool Driver::getServerIdleStatus() {
+  return this->serverIdle;
+}
+
+void Driver::printEvent(Event e) {
+  std::string type;
+    if ( e.getType() == 1) {
+      type = "ARR";
+    } else {
+      type = "DEP";
+    }
+  std::cout << "Event: (" << type << ", " << e.getTime() << ")\n\n";
+}
+
+void Driver::printEvents() {
+  std::cout << "{";
+  if (eventQueue.empty()) {
+    std::cout << "}\n";
+  } else {
+    for(Event& event: eventQueue) {
+      std::string type;
+      if (event.getType() == 1) {
+        type = "ARR";
+      } else {
+        type = "DEP";
+      }
+      if (&event == &eventQueue.back()) {
+        std::cout << "(" << type << ", " << event.getTime() << ")}\n\n";
+      } else {
+        std::cout << "(" << type << ", " << event.getTime() << "), ";
+      }
+    }
+  }
+}
+

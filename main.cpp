@@ -3,9 +3,19 @@
 #include "DistributionGenerator.h"
 #include "Process.h"
 
+#define ARR 1
+#define DEP 2
+
 int main(){
-  Driver driver = Driver(.06, 1, 1, 2);
-  driver.run();
-  std::cout << "Out of Run\n";
+
+    for (int i = 1; i <= 1; i++) {
+        DistributionGenerator arrivalTime(30, ARR);
+        DistributionGenerator serviceTIme(1/0.6, DEP);
+        Driver driver(arrivalTime, serviceTIme);
+        driver.init();
+        driver.run();
+        std::cout << "\n\n\t\t\tFinal time: " << driver.getClock() << "\n";
+    }
+  
   return 0;
 }

@@ -1,0 +1,176 @@
+Initial arrival time: 26
+
+			(schedule) Creating the following event: Event: (ARR, 26)
+
+(run) Current event in run: Event: (ARR, 26)
+
+	(run, arr) Handling arrival...
+
+		(arr, serverIdle) Next departure will happen at time: 82
+
+		(arr, serverIdle) Next departure takes a total of   : 56
+
+			(schedule) Creating the following event: Event: (DEP, 82)
+
+		(arr, serverIdle) Current event queue: {(ARR, 26), (DEP, 82)}
+
+		(arr) Next arrival will happen at time: 71
+
+		(arr) Next departure takes a total of   : 45
+
+			(schedule) Creating the following event: Event: (ARR, 71)
+
+		(arr) Current event queue: {(ARR, 26), (ARR, 71), (DEP, 82)}
+
+(run) Erasing head from queue.
+
+(run) Current event queue: {(ARR, 71), (DEP, 82)}
+
+(run) Current event in run: Event: (ARR, 71)
+
+	(run, arr) Handling arrival...
+
+		(arr) Server is currently busy, adding to back of readyQueueCount
+
+		(arr) Next arrival will happen at time: 108
+
+		(arr) Next departure takes a total of   : 37
+
+			(schedule) Creating the following event: Event: (ARR, 108)
+
+		(arr) Current event queue: {(ARR, 71), (DEP, 82), (ARR, 108)}
+
+(run) Erasing head from queue.
+
+(run) Current event queue: {(DEP, 82), (ARR, 108)}
+
+(run) Current event in run: Event: (DEP, 82)
+
+	(run, dep) Handling departure...
+
+		 (dep) Moving next process from ready queue to run.
+
+		 (dep) Next departure will happen at time: 147
+		 (dep) Next departure takes a total of   : 65
+
+			(schedule) Creating the following event: Event: (DEP, 147)
+
+		(dep) Current event queue: {(DEP, 82), (ARR, 108), (DEP, 147)}
+
+(run) Erasing head from queue.
+
+(run) Current event queue: {(ARR, 108), (DEP, 147)}
+
+(run) Current event in run: Event: (ARR, 108)
+
+	(run, arr) Handling arrival...
+
+		(arr) Server is currently busy, adding to back of readyQueueCount
+
+		(arr) Next arrival will happen at time: 131
+
+		(arr) Next departure takes a total of   : 23
+
+			(schedule) Creating the following event: Event: (ARR, 131)
+
+		(arr) Current event queue: {(ARR, 108), (ARR, 131), (DEP, 147)}
+
+(run) Erasing head from queue.
+
+(run) Current event queue: {(ARR, 131), (DEP, 147)}
+
+(run) Current event in run: Event: (ARR, 131)
+
+	(run, arr) Handling arrival...
+
+		(arr) Server is currently busy, adding to back of readyQueueCount
+
+		(arr) Next arrival will happen at time: 153
+
+		(arr) Next departure takes a total of   : 22
+
+			(schedule) Creating the following event: Event: (ARR, 153)
+
+		(arr) Current event queue: {(ARR, 131), (DEP, 147), (ARR, 153)}
+
+(run) Erasing head from queue.
+
+(run) Current event queue: {(DEP, 147), (ARR, 153)}
+
+(run) Current event in run: Event: (DEP, 147)
+
+	(run, dep) Handling departure...
+
+		 (dep) Moving next process from ready queue to run.
+
+		 (dep) Next departure will happen at time: 201
+		 (dep) Next departure takes a total of   : 54
+
+			(schedule) Creating the following event: Event: (DEP, 201)
+
+		(dep) Current event queue: {(DEP, 147), (ARR, 153), (DEP, 201)}
+
+(run) Erasing head from queue.
+
+(run) Current event queue: {(ARR, 153), (DEP, 201)}
+
+(run) Current event in run: Event: (ARR, 153)
+
+	(run, arr) Handling arrival...
+
+		(arr) Server is currently busy, adding to back of readyQueueCount
+
+(run) Erasing head from queue.
+
+(run) Current event queue: {(DEP, 201)}
+
+(run) Current event in run: Event: (DEP, 201)
+
+	(run, dep) Handling departure...
+
+		 (dep) Moving next process from ready queue to run.
+
+		 (dep) Next departure will happen at time: 270
+		 (dep) Next departure takes a total of   : 69
+
+			(schedule) Creating the following event: Event: (DEP, 270)
+
+		(dep) Current event queue: {(DEP, 201), (DEP, 270)}
+
+(run) Erasing head from queue.
+
+(run) Current event queue: {(DEP, 270)}
+
+(run) Current event in run: Event: (DEP, 270)
+
+	(run, dep) Handling departure...
+
+		 (dep) Moving next process from ready queue to run.
+
+		 (dep) Next departure will happen at time: 332
+		 (dep) Next departure takes a total of   : 62
+
+			(schedule) Creating the following event: Event: (DEP, 332)
+
+		(dep) Current event queue: {(DEP, 270), (DEP, 332)}
+
+(run) Erasing head from queue.
+
+(run) Current event queue: {(DEP, 332)}
+
+(run) Current event in run: Event: (DEP, 332)
+
+	(run, dep) Handling departure...
+
+		(dep) No processes are ready to run, server is idle.
+
+(run) Erasing head from queue.
+
+(run) Current event queue: {}
+	Total arrivals: 5
+	Total departures: 5
+	Total processes: 5
+	Total events: 10
+
+
+			Final time: 332

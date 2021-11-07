@@ -4,10 +4,10 @@
 class Event{
   private:
     float time;
-    bool eType;
+    int eType;
   public:
-    Event(float, bool);
-    bool getType();
+    Event(float, int);
+    int getType();
     float getTime();
 };
 

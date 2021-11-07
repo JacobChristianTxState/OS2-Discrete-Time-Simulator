@@ -1,16 +1,17 @@
 #include "Event.h"
 
-Event::Event(float t, bool ty){
+Event::Event(float t, int ty){
   time = t;
   eType = ty;
 }
 
-bool Event::getType(){
+int Event::getType(){
   return eType;
 }
 
 float Event::getTime(){
   return time;
 }
+
 
 
