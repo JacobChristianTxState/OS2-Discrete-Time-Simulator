@@ -10,7 +10,7 @@ void StatisticDriver::incrementWorkTime(float work) {
 }
 
 void StatisticDriver::incrementClock(float clock) {
-    this->simulatorClock += clock;
+    this->simulatorClock = clock;
 }
 
 void StatisticDriver::incrementTurnaroundTime(float turnAroundTime) {
@@ -26,7 +26,7 @@ float StatisticDriver:: getAverageWaitingTime() {
 }
 
 float StatisticDriver::getCpuUitlization() {
-    return this->accumulatingWorkTime / this->simulatorClock;
+    return (this->accumulatingWorkTime / this->simulatorClock) * 100;   //multiply by 100 to get % value
 }
 
 float StatisticDriver::getAverageTurnaroundTime() {
@@ -35,4 +35,8 @@ float StatisticDriver::getAverageTurnaroundTime() {
 
 float StatisticDriver::getAverageQueueLength() {
     return this->lambda * getAverageWaitingTime();
+}
+
+float StatisticDriver::getThroughput() {
+    return (PROCESSES / this->simulatorClock) * 1000;   //convert ms to sec
 }
