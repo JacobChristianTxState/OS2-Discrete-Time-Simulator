@@ -21,7 +21,6 @@ float DistributionGenerator::generateExponentialDist() {
         case ARR:
             lowerLimit = (1/this->lambda) - (1/(2*this->lambda));
             upperLimit = (1/this->lambda) + (1/(2*this->lambda));
-
             //while (x == 0) { x = -(1/this->lambda)*log(uniformRandom());}
             break;
         case DEP:
