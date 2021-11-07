@@ -1,6 +1,6 @@
 #include "Driver.h"
 
-Driver::Driver(float lambda1, float lambda2, int a_id, float quantum):serviceTime(1/lambda1), arrivalTime(lambda2){
+Driver::Driver(float lambda1, float lambda2, int a_id, float quantum):serviceTime(1/lambda1, DEP), arrivalTime(lambda2, ARR){
   algorithm_id = a_id;
   serveridle = true;
   this->quantum = quantum;
