@@ -5,7 +5,7 @@ Driver::Driver(DistributionGenerator at, DistributionGenerator st) : arrivalTime
 void Driver::scheduleEvent(int eventType, float time) {
   Event event(time, eventType);
   this->eventCount++;
-  std::cout << "\t\t\t(schedule) Creating the following event: ";
+  //std::cout << "\t\t\t(schedule) Creating the following event: ";
   printEvent(event);
   eventQueue.push_back(event);
   std::sort(
@@ -19,64 +19,69 @@ void Driver::init() {
   this->serverIdle = true;
   this->readyQueueCount = 0;
   float initialArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
-  std::cout << "Initial arrival time: " << initialArrivalTime << "\n";
-  std::cout << "\n";
+  //std::cout << "Initial arrival time: " << initialArrivalTime << "\n";
+  //std::cout << "\n";
   this->totalProcesses++;
   this->totalArrivals++;
   scheduleEvent(ARR, initialArrivalTime);
 }
 
 void Driver::run() {
+  this->logger.OpenFile();
   while(totalProcesses < PROCESSES || eventQueue.size() > 0){//} || !this->eventQueue.empty()) {  //run for 10 processes
     Event e = eventQueue[0];
     this->clock = e.getTime();
-    std::cout << "(run) Current event in run: ";
+    //std::cout << "(run) Current event in run: ";
     printEvent(e);
     switch(e.getType()) {
       case ARR:
-        std::cout << "\t(run, arr) Handling arrival...\n\n";
+        //std::cout << "\t(run, arr) Handling arrival...\n\n";
         arriveHandler(e);
         break;
       case DEP: 
-        std::cout << "\t(run, dep) Handling departure...\n\n";
+        //std::cout << "\t(run, dep) Handling departure...\n\n";
         departureHander(e);
         break;
     }
-    std::cout << "(run) Erasing head from queue.\n\n";
+    //std::cout << "(run) Erasing head from queue.\n\n";
     eventQueue.erase(eventQueue.begin());
-    std::cout << "(run) Current event queue: ";
+    //std::cout << "(run) Current event queue: ";
     printEvents();
   }
   std::cout << "\tTotal arrivals: " << this->totalArrivals << "\n";
   std::cout << "\tTotal departures: " << this->totalDepartures << "\n";
   std::cout << "\tTotal processes: " << this->totalProcesses << "\n";
   std::cout << "\tTotal events: " << this->eventCount << "\n";
+  float throughput  = (PROCESSES * 1000 / this->clock); 
+  this->logger.WriteToFile(std::to_string(throughput));
+  this->logger.CloseFile();
+
 }
 
 void Driver::arriveHandler(Event e) {
   if(serverIdle) {
     serverIdle = false;
     float nextServiceTime = std::round(this->serviceTime.generateExponentialDist());
-    std::cout << "\t\t(arr, serverIdle) Next departure will happen at time: " << this->clock + nextServiceTime << "\n\n";
-    std::cout << "\t\t(arr, serverIdle) Next departure takes a total of   : " << nextServiceTime << "\n\n";
+    // std::cout << "\t\t(arr, serverIdle) Next departure will happen at time: " << this->clock + nextServiceTime << "\n\n";
+    // std::cout << "\t\t(arr, serverIdle) Next departure takes a total of   : " << nextServiceTime << "\n\n";
 
     scheduleEvent(DEP, this->clock + nextServiceTime);
     this->totalDepartures++;
-    std::cout << "\t\t(arr, serverIdle) Current event queue: ";
+    // std::cout << "\t\t(arr, serverIdle) Current event queue: ";
     printEvents();
     
   } else {
-    std::cout << "\t\t(arr) Server is currently busy, adding to back of readyQueueCount\n\n";
+    // std::cout << "\t\t(arr) Server is currently busy, adding to back of readyQueueCount\n\n";
     readyQueueCount++;
   }
   if (this->totalProcesses < PROCESSES) {
     float nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
-    std::cout << "\t\t(arr) Next arrival will happen at time: " << this->clock + nextArrivalTime << "\n\n";
-    std::cout << "\t\t(arr) Next departure takes a total of   : " << nextArrivalTime << "\n\n";
+    // std::cout << "\t\t(arr) Next arrival will happen at time: " << this->clock + nextArrivalTime << "\n\n";
+    // std::cout << "\t\t(arr) Next departure takes a total of   : " << nextArrivalTime << "\n\n";
     scheduleEvent(ARR, this->clock + nextArrivalTime);
     this->totalProcesses++;
     this->totalArrivals++;
-    std::cout << "\t\t(arr) Current event queue: ";
+    // std::cout << "\t\t(arr) Current event queue: ";
     printEvents();
   }
   
@@ -84,17 +89,17 @@ void Driver::arriveHandler(Event e) {
 
 void Driver::departureHander(Event e) {
   if (readyQueueCount == 0) {
-    std::cout << "\t\t(dep) No processes are ready to run, server is idle.\n\n";
+    // std::cout << "\t\t(dep) No processes are ready to run, server is idle.\n\n";
     serverIdle = true;
   } else {
     readyQueueCount--;
-    std::cout << "\t\t (dep) Moving next process from ready queue to run.\n\n";
+    // std::cout << "\t\t (dep) Moving next process from ready queue to run.\n\n";
     float nextServiceTime = std::round(this->serviceTime.generateExponentialDist());
-    std::cout << "\t\t (dep) Next departure will happen at time: " << this->clock + nextServiceTime << "\n";
-    std::cout << "\t\t (dep) Next departure takes a total of   : " << nextServiceTime << "\n\n";
+    // std::cout << "\t\t (dep) Next departure will happen at time: " << this->clock + nextServiceTime << "\n";
+    // std::cout << "\t\t (dep) Next departure takes a total of   : " << nextServiceTime << "\n\n";
     scheduleEvent(DEP, this->clock + nextServiceTime);
     this->totalDepartures++;
-    std::cout << "\t\t(dep) Current event queue: ";
+    // std::cout << "\t\t(dep) Current event queue: ";
     printEvents();
   }
 }
@@ -112,33 +117,33 @@ bool Driver::getServerIdleStatus() {
 }
 
 void Driver::printEvent(Event e) {
-  std::string type;
-    if ( e.getType() == 1) {
-      type = "ARR";
-    } else {
-      type = "DEP";
-    }
-  std::cout << "Event: (" << type << ", " << e.getTime() << ")\n\n";
+  // std::string type;
+  //   if ( e.getType() == 1) {
+  //     type = "ARR";
+  //   } else {
+  //     type = "DEP";
+  //   }
+  // std::cout << "Event: (" << type << ", " << e.getTime() << ")\n\n";
 }
 
 void Driver::printEvents() {
-  std::cout << "{";
-  if (eventQueue.empty()) {
-    std::cout << "}\n";
-  } else {
-    for(Event& event: eventQueue) {
-      std::string type;
-      if (event.getType() == 1) {
-        type = "ARR";
-      } else {
-        type = "DEP";
-      }
-      if (&event == &eventQueue.back()) {
-        std::cout << "(" << type << ", " << event.getTime() << ")}\n\n";
-      } else {
-        std::cout << "(" << type << ", " << event.getTime() << "), ";
-      }
-    }
-  }
+  // std::cout << "{";
+  // if (eventQueue.empty()) {
+  //   std::cout << "}\n";
+  // } else {
+  //   for(Event& event: eventQueue) {
+  //     std::string type;
+  //     if (event.getType() == 1) {
+  //       type = "ARR";
+  //     } else {
+  //       type = "DEP";
+  //     }
+  //     if (&event == &eventQueue.back()) {
+  //       std::cout << "(" << type << ", " << event.getTime() << ")}\n\n";
+  //     } else {
+  //       std::cout << "(" << type << ", " << event.getTime() << "), ";
+  //     }
+  //   }
+  // }
 }
 
