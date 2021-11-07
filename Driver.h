@@ -6,16 +6,14 @@
 #include "Process.h"
 #include "SimulatorLogger.h"
 #include "StatisticDriver.h"
+#include "EventTypeEnum.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>
 #include <string>
 #include <sstream>
 
-#define ARR 1
-#define DEP 2
-#define PROCESSES 10000
-
+extern const int PROCESSCOUNT;
 extern float arrivalLambda; //from main.cpp
 
 class Driver{
