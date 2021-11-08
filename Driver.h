@@ -25,14 +25,11 @@ class Driver{
     StatisticDriver stats;
     std::vector<Event> eventQueue;
     std::vector<Process*> processReadyQueue;
-    std::vector<Process*> completionList;
+    //std::vector<Process*> completionList;
     Process* currentlyRunningProcess;
-    bool serverIdle;
-    int readyQueueCount;
     int totalProcesses = 0;
     int totalArrivals = 0;
     int totalDepartures = 0;
-    int eventCount = 0;
     float clock;
 
   public:
@@ -43,14 +40,6 @@ class Driver{
     void departureHander(Event e);
     void scheduleEvent(int, float);
     float getClock();
-    int getReadyQueueCount();
-    bool getServerIdleStatus();
-    void printEvents();
-    void printProcessReadyQueue();
-    void printEvent(Event e);
-    void printCompletionList();
-    void printProcess(Process* process);
-
 };
   
 #endif
