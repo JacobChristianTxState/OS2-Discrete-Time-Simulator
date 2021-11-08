@@ -1,6 +1,6 @@
 #include "Process.h"
 
-Process::Process(int processID, float arrivalTime, float serviceTime) {
+Process::Process(int processID, unsigned long arrivalTime, unsigned long serviceTime) {
   this->processID = processID;
   this->arrivalTime = arrivalTime;
   this->serviceTime = serviceTime;
@@ -10,15 +10,15 @@ int Process::getID(){
   return this->processID;
 }
 
-float Process::getArrivalTime(){
+unsigned long Process::getArrivalTime(){
   return this->arrivalTime;
 }
 
-float Process::getServiceTime(){
+unsigned long Process::getServiceTime(){
   return this->serviceTime;
 }
 
-float Process::getRemainingServiceTime(){
+unsigned long Process::getRemainingServiceTime(){
   return this->remainingServiceTime;
 }
 
@@ -26,7 +26,7 @@ void Process::setRemainingServiceTime(float timeSlice){
     this->remainingServiceTime -= timeSlice;
 }
 
-float Process::getCompletionTime() {
+unsigned long Process::getCompletionTime() {
   return this->completionTime;
 }
 void Process::setCompletionTime(float completionTime) {

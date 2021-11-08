@@ -1,7 +1,7 @@
 OBJS	= DistributionGenerator.o Driver.o Event.o main.o Process.o SimulatorLogger.o StatisticDriver.o
 SOURCE	= main.cpp DistributionGenerator.cpp Driver.cpp Event.cpp Process.cpp SimulatorLogger.cpp StatisticDriver.cpp
 HEADER	= DistributionGenerator.h Driver.h Event.h Process.h SimulatorLogger.h StatisticDriver.h EventTypeEnum.h
-OUT	= main
+OUT	= main.exe
 CC	 = g++
 FLAGS	 = -g -c -Wall -std=c++0x
 LFLAGS	 = 

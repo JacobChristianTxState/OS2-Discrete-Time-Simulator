@@ -15,7 +15,7 @@ class DistributionGenerator {
         float uniformRandom();
     public:
         DistributionGenerator(float lambda, int distributionType);
-        float generateExponentialDist();
+        unsigned long generateExponentialDist();
 };
 
 #endif //DISTRIBUTIONGENERATOR_

@@ -3,12 +3,12 @@
 
 class Event{
   private:
-    float time;
+    unsigned long time;
     int eType;
   public:
-    Event(float, int);
+    Event(unsigned long, int);
     int getType();
-    float getTime();
+    unsigned long getTime();
 };
 
 #endif

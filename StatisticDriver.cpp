@@ -2,45 +2,38 @@
 
 StatisticDriver::StatisticDriver() {
     this->lambda = arrivalLambda;
-    std::cout << "Arrival Lambda: " << this->lambda << "\n";
-    this->accumulatingTurnaroundTime = 0.0;
-    this->accumulatingWaitingTime = 0.0;
-    this->accumulatingWorkTime = 0.0;
-    this->simulatorClock = 0.0;
+    this->accumulatingTurnaroundTime = 0;
+    this->accumulatingWaitingTime = 0;
+    this->accumulatingWorkTime = 0;
+    this->simulatorClock = 0;
 }
 
-void StatisticDriver::incrementWorkTime(float work) {
+void StatisticDriver::incrementWorkTime(unsigned long work) {
     this->accumulatingWorkTime += work;
 }
 
-void StatisticDriver::incrementClock(float clock) {
+void StatisticDriver::incrementClock(unsigned long clock) {
     this->simulatorClock = clock;
 }
 
-void StatisticDriver::incrementTurnaroundTime(float turnAroundTime) {
+void StatisticDriver::incrementTurnaroundTime(unsigned long turnAroundTime) {
     this->accumulatingTurnaroundTime += turnAroundTime;
 }
 
-void StatisticDriver::incrementWaitingTime(float waitingTime) {
+void StatisticDriver::incrementWaitingTime(unsigned long waitingTime) {
     this->accumulatingWaitingTime += waitingTime;
 }
 
 float StatisticDriver:: getAverageWaitingTime() {
-    return this->accumulatingWaitingTime / PROCESSCOUNT;
+    return this->accumulatingWaitingTime / (1.0*PROCESSCOUNT);
 }
 
 float StatisticDriver::getCpuUitlization() {
-    std::cout << "Total Working time: " << this->accumulatingWorkTime << "\n";
-    std::cout << "Running clock final value: " << this->simulatorClock << "\n";
-    std::cout << "Total number of processes (shoulud be 10000): " << PROCESSCOUNT << "\n";
-    std::cout << "Average Wait Time: " << getAverageWaitingTime() << "\n";
-    std::cout << "Average Queue Length: " << getAverageQueueLength() << "\n";
-    std::cout << "Current Lambda: " << arrivalLambda << "\n";
-    return 100*(this->accumulatingWorkTime / this->simulatorClock);   //multiply by 100 to get % value
+    return 100*(this->accumulatingWorkTime / (1.0*this->simulatorClock));   //multiply by 100 to get % value
 }
 
 float StatisticDriver::getAverageTurnaroundTime() {
-    return (this->accumulatingTurnaroundTime / (PROCESSCOUNT*1000)); //convert ms to sec
+    return (this->accumulatingTurnaroundTime / (1000.0*PROCESSCOUNT)); //convert ms to sec
 }
 
 float StatisticDriver::getAverageQueueLength() {
@@ -48,9 +41,19 @@ float StatisticDriver::getAverageQueueLength() {
 }
 
 float StatisticDriver::getThroughput() {
-    return (PROCESSCOUNT / this->simulatorClock) * 1000;   //convert ms to sec
+    return (float)((PROCESSCOUNT*1000) / (1.0*this->simulatorClock));   //convert ms to sec
 }
 
-float StatisticDriver::getFinalTime() {
+unsigned long StatisticDriver::getFinalTime() {
     return this->simulatorClock;
+}
+
+void StatisticDriver::collectDepartureStats(Process departingProcess) {
+    incrementWorkTime(departingProcess.getServiceTime());
+    incrementTurnaroundTime(departingProcess.getCompletionTime() - departingProcess.getArrivalTime());
+    incrementWaitingTime(
+        departingProcess.getCompletionTime() - 
+        departingProcess.getServiceTime() - 
+        departingProcess.getArrivalTime()
+    );
 }

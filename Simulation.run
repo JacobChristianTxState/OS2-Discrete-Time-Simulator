@@ -12,7 +12,7 @@ echo "Lambda,Average Throughput,Average Turnaround Time,Cpu Utilization,Average 
 
 make
 for ((i = 1; i <= 30; i++)); do  
-   ./main 1 $i 0.06 0.01 >> test.txt
+   ./main.exe 1 $i 0.06 0.01 >> test.txt
    cat sim.data >> sim-1.data
    cat sim.data >> sim-1.csv
 done 

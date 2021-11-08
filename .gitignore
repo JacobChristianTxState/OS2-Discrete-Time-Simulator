@@ -50,7 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-
+*.txt
+*.csv
+*.data
 #vscode
 .vscode/
 .vs
+main.exe

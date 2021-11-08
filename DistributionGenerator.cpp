@@ -2,7 +2,7 @@
 
 
 #include "DistributionGenerator.h"
-
+#include <iostream>
 DistributionGenerator::DistributionGenerator(float lambda, int distributionType) {
     this->lambda = lambda;
     this->distributionType = distributionType;
@@ -12,7 +12,7 @@ float DistributionGenerator::uniformRandom() {
     return( (float) rand()/RAND_MAX );
 }
 
-float DistributionGenerator::generateExponentialDist() {
+unsigned long DistributionGenerator::generateExponentialDist() {
     float lowerLimit, upperLimit;
     float x = 0;
 
@@ -31,8 +31,8 @@ float DistributionGenerator::generateExponentialDist() {
     }
     while ( x == 0 || x < lowerLimit || x > upperLimit) {
         x = -(1/this->lambda)*log(uniformRandom());
-    }  
-    return x * 1000;
+    } 
+    return (unsigned long)(x * 1000);
 }
 
 

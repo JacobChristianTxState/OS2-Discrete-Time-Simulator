@@ -4,18 +4,18 @@
 class Process{
     private:
       int processID = -1;
-      float arrivalTime = -1;
-      float serviceTime = -1;
-      float remainingServiceTime = -1;
-      float completionTime = -1;
+      unsigned long arrivalTime = -1;
+      unsigned long serviceTime = -1;
+      unsigned long remainingServiceTime = -1;
+      unsigned long completionTime = -1;
     public:
-      Process(int processID, float arrivalTime, float serviceTime);
+      Process(int processID, unsigned long arrivalTime, unsigned long serviceTime);
       int getID();
-      float getArrivalTime();
-      float getServiceTime();
-      float getRemainingServiceTime();
+      unsigned long getArrivalTime();
+      unsigned long getServiceTime();
+      unsigned long getRemainingServiceTime();
       void setRemainingServiceTime(float timeSlice);
-      float getCompletionTime();
+      unsigned long getCompletionTime();
       void setCompletionTime(float completionTime);
       void setArrivalTime(float arrivalTime);
 };

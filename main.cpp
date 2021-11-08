@@ -6,7 +6,7 @@
 
 float arrivalLambda;
 float serviceLambda;
-const int PROCESSCOUNT = 100000;
+const int PROCESSCOUNT = 10000;
 
 int main(int argc, char *argv[]) {
     arrivalLambda = atof(argv[2]);
@@ -17,6 +17,5 @@ int main(int argc, char *argv[]) {
     driver.init();
     driver.run();
     std::cout << "\t\t\tFinal time: " << driver.getClock() << "\n\n";
-
     return 0;
 }
