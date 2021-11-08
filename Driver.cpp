@@ -71,7 +71,7 @@ void Driver::run() {
   this->logger.WriteToFile(ss.str());
   this->logger.CloseFile();
   // std::cout << "\tProcess completion list: " << "\n";
-  // printCompletionList();
+  printCompletionList();
 }
 
 void Driver::arriveHandler(Event e) {
@@ -83,8 +83,8 @@ void Driver::arriveHandler(Event e) {
   Process* newProcess = new Process(++this->totalProcesses, this->clock + nextArrivalTime, nextServiceTime);
   // std::cout << "\t\t(arr) b3. Current new process info: \n";
   //printProcess(newProcess);
-  if(!currentlyRunningProcess && serverIdle) {
-    serverIdle = false;
+  if(!currentlyRunningProcess){ //&& serverIdle) {
+    //serverIdle = false;
     currentlyRunningProcess = newProcess;
     currentlyRunningProcess->setArrivalTime(this->clock);
     float currentServiceTime = currentlyRunningProcess->getServiceTime();
@@ -101,7 +101,7 @@ void Driver::arriveHandler(Event e) {
     
   } else {
     // std::cout << "\t\t(arr, active) b5_1. Server is currently busy, adding to back of readyQueueCount\n\n";
-    readyQueueCount++;
+    //readyQueueCount++;
     processReadyQueue.push_back(newProcess);
     // std::cout << "\t\t(arr, active) b5_2. Process Ready Queue: ";
     // printProcessReadyQueue();
@@ -132,11 +132,11 @@ void Driver::arriveHandler(Event e) {
 }
 
 void Driver::departureHander(Event e) {
-  if (processReadyQueue.empty()&& readyQueueCount == 0) {//readyQueueCount == 0) {
+  if (processReadyQueue.empty()){//&& readyQueueCount == 0) {//readyQueueCount == 0) {
     // std::cout << "\t\t(dep, empty) c1_1. No processes are ready to run, server is idle.\n\n";
     Process* completedProcess(this->currentlyRunningProcess);
     this->currentlyRunningProcess = nullptr;
-    serverIdle = true;
+    //serverIdle = true;
     // std::cout << "\t\t(dep, empty) c1_2. Adding the following process to completion queue...\n\n";
     completedProcess->setCompletionTime(this->clock);
     // printProcess(completedProcess);
@@ -145,9 +145,10 @@ void Driver::departureHander(Event e) {
     std::cout << "\nTurn around time: " << completedProcess->getCompletionTime() - completedProcess->getArrivalTime();
     // std::cout << "\t\t(dep, empty) c1_3. completed process completion time == clock time: " << (completedProcess->getCompletionTime() == getClock()) << "\n";
     this->completionList.push_back(completedProcess);
+    //delete completedProcess;
 
   } else {
-    readyQueueCount--;
+    //readyQueueCount--;
     currentlyRunningProcess = processReadyQueue[0];
     processReadyQueue.erase(processReadyQueue.begin());
     // std::cout << "\t\t (dep, occupied) c2_1. Moving next process from ready queue to run.\n\n";
