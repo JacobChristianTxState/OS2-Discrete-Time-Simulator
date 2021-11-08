@@ -9,13 +9,16 @@ float serviceLambda;
 const int PROCESSCOUNT = 10000;
 
 int main(int argc, char *argv[]) {
-    arrivalLambda = atof(argv[2]);
-    serviceLambda = atof(argv[3]);
+    int scheduleType = std::stoi(argv[1]);
+    arrivalLambda = std::stof(argv[2]);
+    serviceLambda = std::stof(argv[3]);
+    float quantum = std::stof(argv[4]);
+
     DistributionGenerator arrivalTime(arrivalLambda, eventTypeEnums::ARR);
     DistributionGenerator serviceTime(serviceLambda, eventTypeEnums::DEP);
-    Driver driver(arrivalTime, serviceTime);
+    Driver driver(arrivalTime, serviceTime, scheduleType, quantum);
     driver.init();
     driver.run();
-    std::cout << "\t\t\tFinal time: " << driver.getClock() << "\n\n";
+    //std::cout << "\t\t\tFinal time: " << driver.getClock() << "\n\n";
     return 0;
 }

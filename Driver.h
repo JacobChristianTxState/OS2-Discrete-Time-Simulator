@@ -8,6 +8,7 @@
 #include "StatisticDriver.h"
 #include "EventTypeEnum.h"
 #include <vector>
+#include <deque>
 #include <algorithm>
 #include <iostream>
 #include <string>
@@ -23,8 +24,8 @@ class Driver{
     DistributionGenerator serviceTime;
     SimulatorLogger logger;
     StatisticDriver stats;
-    std::vector<Event> eventQueue;
-    std::vector<Process*> processReadyQueue;
+    std::deque<Event> eventQueue;
+    std::deque<Process*> processReadyQueue;
     Process* currentlyRunningProcess;
     bool serverIdle;
     int readyQueueCount;
@@ -34,13 +35,19 @@ class Driver{
     int eventCount = 0;
     unsigned long clock;
     unsigned long firstArrivalTimeStamp;
+    int scheduleType;
+    float quantum;
 
   public:
-    Driver(DistributionGenerator, DistributionGenerator);
+    Driver(DistributionGenerator, DistributionGenerator, int scheduleType, float quantum);
     void init();
     void run();
-    void arriveHandler(Event e);
-    void departureHander(Event e);
+    void arrivalHandlerFCFS(Event e);
+    void arrivalHandlerSRTF(Event e);
+    void arrivalHandlerRR(Event e);
+    void runHandlerRR(Event e);
+    void runHandlerSRTF(Event e);
+    void departureHandler(Event e);
     void scheduleEvent(int, unsigned long);
     unsigned long getClock();
     int getReadyQueueCount();
@@ -50,6 +57,9 @@ class Driver{
     void printEvent(Event e);
     void printProcess(Process* process);
     std::string transferDataResults();
+    void scheduleArrival(Event e);
+    void scheduleRun(Event e);
+
 
 };
   

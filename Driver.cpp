@@ -1,6 +1,7 @@
 #include "Driver.h"
 
-Driver::Driver(DistributionGenerator at, DistributionGenerator st) : arrivalTime(at), serviceTime(st) {}
+Driver::Driver(DistributionGenerator at, DistributionGenerator st, int scheduleType, float quantum) : 
+arrivalTime(at), serviceTime(st), scheduleType(scheduleType), quantum(quantum) {}
 
 void Driver::scheduleEvent(int eventType, unsigned long time) {
   Event event(time, eventType);
@@ -24,19 +25,27 @@ void Driver::init() {
 
 void Driver::run() {
   this->logger.OpenFile();
-  while(this->totalProcesses < PROCESSCOUNT || eventQueue.size() > 0){
-    Event e = eventQueue[0];
-    this->clock = e.getTime();
-    stats.incrementClock(getClock());
-    switch(e.getType()) {
-      case eventTypeEnums::ARR:
-        arriveHandler(e);
-        break;
-      case eventTypeEnums::DEP: 
-        departureHander(e);
-        break;
+   while(this->totalProcesses < PROCESSCOUNT || !eventQueue.empty()){
+     Event e = this->eventQueue.front();
+     this->clock = e.getTime();
+     stats.incrementClock(getClock());
+     //The type of event we have: running, arrival, departure
+     printEvents();
+     switch(e.getType()) {
+       case eventTypeEnums::ARR: 
+          scheduleArrival(e);
+          break;
+      case eventTypeEnums::RUN:
+          scheduleRun(e);
+          break;
+      case eventTypeEnums::DEP:
+          departureHandler(e);
+          break;
+      default:
+        std::cout << "ERROR WITH SCHEDULING\n";
+    
     }
-    eventQueue.erase(eventQueue.begin());
+    this->eventQueue.pop_front();    
   }
   std::cout << "\tTotal arrivals: " << this->totalArrivals << "\n";
   std::cout << "\tTotal departures: " << this->totalDepartures << "\n";
@@ -46,13 +55,12 @@ void Driver::run() {
   this->logger.CloseFile();
 }
 
-void Driver::arriveHandler(Event e) {
+void Driver::arrivalHandlerFCFS(Event e) {
   unsigned long nextServiceTime = std::round(this->serviceTime.generateExponentialDist());
   Process* newProcess = new Process(++this->totalProcesses, this->clock, nextServiceTime);
   if (currentlyRunningProcess == nullptr) {
     currentlyRunningProcess = newProcess;
     scheduleEvent(eventTypeEnums::DEP, this->clock + currentlyRunningProcess->getServiceTime());
-
   } else {
     processReadyQueue.push_back(newProcess);
   }
@@ -64,7 +72,42 @@ void Driver::arriveHandler(Event e) {
   } 
 }
 
-void Driver::departureHander(Event e) {
+void Driver::arrivalHandlerSRTF(Event e) {
+  std::cout << "I'm gonna made me a SRTF run\n";
+  unsigned long nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
+  scheduleEvent(eventTypeEnums::RUN, this->clock + nextArrivalTime);
+  this->totalProcesses++;
+  if(this->totalProcesses < PROCESSCOUNT) {
+    unsigned long nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
+    scheduleEvent(eventTypeEnums::ARR, this->clock + nextArrivalTime);
+    this->totalArrivals++;
+  } 
+}
+
+void Driver::arrivalHandlerRR(Event e) {
+  std::cout << "I'm gonna made me a RR run\n";
+  unsigned long nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
+  scheduleEvent(eventTypeEnums::RUN, this->clock + nextArrivalTime);
+  this->totalProcesses++;
+  if(this->totalProcesses < PROCESSCOUNT) {
+    unsigned long nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
+    scheduleEvent(eventTypeEnums::ARR, this->clock + nextArrivalTime);
+    this->totalArrivals++;
+  } 
+
+}
+
+void Driver::runHandlerSRTF(Event e) {
+  std::cout << "OMG ITS RUNNING SRTF\n";
+}
+
+void Driver::runHandlerRR(Event e) {
+  std::cout << "OMG ITS RUNNING RR\n";
+}
+
+
+
+void Driver::departureHandler(Event e) {
   Process* runningProcess = this->currentlyRunningProcess;
   runningProcess->setCompletionTime(this->clock);
   stats.collectDepartureStats(*runningProcess);
@@ -94,12 +137,28 @@ bool Driver::getServerIdleStatus() {
 
 void Driver::printEvent(Event e) {
   std::string type;
-    if ( e.getType() == 1) {
+  switch(e.getType()) {
+    case eventTypeEnums::ARR:
       type = "ARR";
-    } else {
+      break;
+    case eventTypeEnums::DEP:
       type = "DEP";
+      break;
+    case eventTypeEnums::RUN:
+      type = "RUN";
+      break;
+    default:
+      type = "ERR";
+      break;
+  }
+    if ( e.getType() == eventTypeEnums::ARR) {
+      type = "ARR";
+    } else if (e.getType() == eventTypeEnums::DEP){
+      type = "DEP";
+    } else {
+      type = "RUN";
     }
-  std::cout << std::fixed << std::setprecision(15)<< "Event: (" << type << ", " << e.getTime() << ")\n\n";
+  std::cout << "(" << type << ", " << e.getTime() << ")";
 }
 
 void Driver::printEvents() {
@@ -108,16 +167,11 @@ void Driver::printEvents() {
     std::cout << "}\n";
   } else {
     for(Event& event: eventQueue) {
-      std::string type;
-      if (event.getType() == 1) {
-        type = "ARR";
-      } else {
-        type = "DEP";
-      }
+      printEvent(event);
       if (&event == &eventQueue.back()) {
-        std::cout << "(" << type << ", " << event.getTime() << ")}\n\n";
+        std::cout << ")}\n\n";
       } else {
-        std::cout << "(" << type << ", " << event.getTime() << "), ";
+        std::cout << "), ";
       }
     }
   }
@@ -159,5 +213,32 @@ std::string Driver::transferDataResults() {
   return ss.str();
 }
 
+void Driver::scheduleArrival(Event e) {
+  switch(this->scheduleType) {
+    case eventTypeEnums::RR:
+      std::cout << "ROUND ROBIN SCHEDULE\n";
+      arrivalHandlerRR(e);
+      break;
+    case eventTypeEnums::FCFS:
+      std::cout << "FCFS\n";
+      arrivalHandlerFCFS(e);
+      break;
+    case eventTypeEnums::SRTF:
+      std::cout << "SRTF\n";
+      arrivalHandlerSRTF(e);
+      break;
+  }
+}
 
-
+void Driver::scheduleRun(Event e){
+  switch(this->scheduleType) {
+    case eventTypeEnums::RR:
+      std::cout << "ROUND ROBIN RUN\n";
+      runHandlerRR(e);
+      break;
+    case eventTypeEnums::SRTF:
+      std::cout << "SRTF\n";
+      runHandlerSRTF(e);
+      break;
+  }
+}
