@@ -34,7 +34,7 @@ float StatisticDriver::getCpuUitlization() {
 }
 
 float StatisticDriver::getAverageTurnaroundTime() {
-    return this->accumulatingTurnaroundTime / PROCESSCOUNT;
+    return (this->accumulatingTurnaroundTime / (PROCESSCOUNT*1000)); //convert ms to sec
 }
 
 float StatisticDriver::getAverageQueueLength() {

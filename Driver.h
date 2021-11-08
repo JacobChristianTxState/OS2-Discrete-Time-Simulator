@@ -24,7 +24,8 @@ class Driver{
     SimulatorLogger logger;
     StatisticDriver stats;
     std::vector<Event> eventQueue;
-    std::vector<Process> processReadyQueue;
+    std::vector<Process*> processReadyQueue;
+    std::vector<Process*> completionList;
     Process* currentlyRunningProcess;
     bool serverIdle;
     int readyQueueCount;
@@ -47,6 +48,8 @@ class Driver{
     void printEvents();
     void printProcessReadyQueue();
     void printEvent(Event e);
+    void printCompletionList();
+    void printProcess(Process* process);
 
 };
   
