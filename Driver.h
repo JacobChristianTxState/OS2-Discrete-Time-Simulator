@@ -33,7 +33,8 @@ class Driver{
     int totalArrivals = 0;
     int totalDepartures = 0;
     int eventCount = 0;
-    float clock;
+    unsigned long clock;
+    unsigned long firstArrivalTimeStamp;
 
   public:
     Driver(DistributionGenerator, DistributionGenerator);
@@ -41,8 +42,8 @@ class Driver{
     void run();
     void arriveHandler(Event e);
     void departureHander(Event e);
-    void scheduleEvent(int, float);
-    float getClock();
+    void scheduleEvent(int, unsigned long);
+    unsigned long getClock();
     int getReadyQueueCount();
     bool getServerIdleStatus();
     void printEvents();

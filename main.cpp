@@ -6,7 +6,7 @@
 
 float arrivalLambda;
 float serviceLambda;
-const int PROCESSCOUNT = 10000;
+const int PROCESSCOUNT = 100000;
 
 int main(int argc, char *argv[]) {
     arrivalLambda = atof(argv[2]);

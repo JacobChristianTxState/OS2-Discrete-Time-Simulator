@@ -30,7 +30,13 @@ float StatisticDriver:: getAverageWaitingTime() {
 }
 
 float StatisticDriver::getCpuUitlization() {
-    return (this->accumulatingWorkTime / this->simulatorClock) * 100;   //multiply by 100 to get % value
+    std::cout << "Total Working time: " << this->accumulatingWorkTime << "\n";
+    std::cout << "Running clock final value: " << this->simulatorClock << "\n";
+    std::cout << "Total number of processes (shoulud be 10000): " << PROCESSCOUNT << "\n";
+    std::cout << "Average Wait Time: " << getAverageWaitingTime() << "\n";
+    std::cout << "Average Queue Length: " << getAverageQueueLength() << "\n";
+    std::cout << "Current Lambda: " << arrivalLambda << "\n";
+    return 100*(this->accumulatingWorkTime / this->simulatorClock);   //multiply by 100 to get % value
 }
 
 float StatisticDriver::getAverageTurnaroundTime() {
@@ -43,4 +49,8 @@ float StatisticDriver::getAverageQueueLength() {
 
 float StatisticDriver::getThroughput() {
     return (PROCESSCOUNT / this->simulatorClock) * 1000;   //convert ms to sec
+}
+
+float StatisticDriver::getFinalTime() {
+    return this->simulatorClock;
 }

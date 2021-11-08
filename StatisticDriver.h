@@ -25,6 +25,8 @@ class StatisticDriver {
         float getAverageTurnaroundTime();
         float getAverageQueueLength();
         float getThroughput();
+        float getFinalTime();
+        float getFinalWorkTime();
 };
 
 #endif //STATISTICDRIVER_
