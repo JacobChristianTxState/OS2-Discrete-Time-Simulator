@@ -41,9 +41,18 @@ void Driver::handleArr(){
   Process *p = new Process(pid, clock + arrTime, this->serviceTime.generateExponentialDist(), 0);
   if(running_process == nullptr){
     running_process = p;
-    float duh = clock + calcProcessTime();
-    Event dep = Event(duh, false);
-    scheduleEvent(dep);
+    /*
+    */
+    float check = running_process->getRemainingServiceTime() - quantum;
+    if(check <= 0){
+      float duh = clock + running_process->getRemainingServiceTime();
+      Event dep = Event(duh, false);
+      scheduleEvent(dep);
+    }else{
+      running_process = processReadyQueue[0];
+      Event preEmpt = Event(clock + quantum, true);
+      scheduleEvent(preEmpt);
+    }
   }else{
     pid++;
     scheduleProcess(p);
@@ -71,7 +80,7 @@ float Driver::calcProcessTime(){
   float t = 0.0;
   switch(algorithm_id){
     case 3:
-      return 0.0;
+
       break;
     case 4:
       return 0.0;
