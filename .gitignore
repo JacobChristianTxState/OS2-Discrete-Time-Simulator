@@ -50,7 +50,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+<<<<<<< HEAD
 #vscode
 .vscode/
 .vs
 main.exe
+=======
+
+#vscode
+.vscode/
+>>>>>>> fdd2d96ab5e4befd950dde1a2a785abce8af199a
