@@ -1,41 +1,39 @@
 #include "Process.h"
 
-Process::Process(int id, float arrivalTime, float serviceTime, int priority){
-  this->id = id;
+Process::Process(int processID, unsigned long arrivalTime, unsigned long serviceTime) {
+  this->processID = processID;
   this->arrivalTime = arrivalTime;
   this->serviceTime = serviceTime;
-  this->remainingServiceTime = serviceTime;
-  this->priority = priority;
+  this->remainingServiceTime = this->serviceTime;
 }
 
 int Process::getID(){
-  return id;
+  return this->processID;
 }
 
-float Process::getArrivalTime(){
-  return arrivalTime;
+unsigned long Process::getArrivalTime(){
+  return this->arrivalTime;
 }
 
-float Process::getServiceTime(){
-  return serviceTime;
+unsigned long Process::getServiceTime(){
+  return this->serviceTime;
 }
 
-float Process::getRemainingServiceTime(){
-  return remainingServiceTime;
+unsigned long Process::getRemainingServiceTime(){
+  return this->remainingServiceTime;
 }
 
-int Process::getPriority(){
-  return priority;
+void Process::setRemainingServiceTime(float timeSlice){
+    this->remainingServiceTime = timeSlice;
 }
 
-void Process::setRemainingServiceTime(float quantum){
-  remainingServiceTime = getRemainingServiceTime() - quantum;
+unsigned long Process::getCompletionTime() {
+  return this->completionTime;
+}
+void Process::setCompletionTime(float completionTime) {
+  this->completionTime = completionTime;
 }
 
-void Process::setArrivalTime(float time){
-  arrivalTime = time;
-}
-
-void Process::setPriority(int priority){
-  this->priority = priority;
+void Process::setArrivalTime(float arrivalTime) {
+  this->arrivalTime = arrivalTime;
 }

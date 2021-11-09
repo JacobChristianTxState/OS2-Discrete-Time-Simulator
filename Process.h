@@ -2,25 +2,22 @@
 #define PROCESS
 
 class Process{
-  public:
-    int id;
-    float arrivalTime;
-    float serviceTime;
-    float remainingServiceTime;
-    int priority;
-
-    Process(int, float, float, int);
-    //Getters
-    int getID();
-    float getArrivalTime();
-    float getServiceTime();
-    float getRemainingServiceTime();
-    int getPriority();
-    //Setters
-    void setRemainingServiceTime(float);
-    /* Sets the arrival time of the process*/
-    void setArrivalTime(float);
-    void setPriority(int);
+    private:
+      int processID = -1;
+      unsigned long arrivalTime;
+      unsigned long serviceTime;
+      unsigned long remainingServiceTime = 0;
+      unsigned long completionTime;
+    public:
+      Process(int processID, unsigned long arrivalTime, unsigned long serviceTime);
+      int getID();
+      unsigned long getArrivalTime();
+      unsigned long getServiceTime();
+      unsigned long getRemainingServiceTime();
+      void setRemainingServiceTime(float timeSlice);
+      unsigned long getCompletionTime();
+      void setCompletionTime(float completionTime);
+      void setArrivalTime(float arrivalTime);
 };
 
 #endif
