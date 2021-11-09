@@ -21,43 +21,51 @@
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 30158
+	Total events: 30141
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 30534
+	Total events: 30505
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 31080
+	Total events: 31067
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 31761
+	Total events: 31803
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 32566
+	Total events: 32617
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 33564
+	Total events: 33618
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 34689
+	Total events: 34839
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 35974
+	Total events: 36179
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 37461
+	Total events: 37713
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 39208
+	Total events: 39453
+	Total arrivals: 10000
+	Total departures: 10000
+	Total processes: 10000
+	Total events: 39837
+	Total arrivals: 10000
+	Total departures: 10000
+	Total processes: 10000
+	Total events: 39832
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
@@ -65,23 +73,19 @@
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 39839
+	Total events: 39812
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 39869
+	Total events: 39826
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 39841
+	Total events: 39825
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 39799
-	Total arrivals: 10000
-	Total departures: 10000
-	Total processes: 10000
-	Total events: 39848
+	Total events: 39814
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
@@ -89,32 +93,28 @@
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 39829
-	Total arrivals: 10000
-	Total departures: 10000
-	Total processes: 10000
-	Total events: 39828
-	Total arrivals: 10000
-	Total departures: 10000
-	Total processes: 10000
-	Total events: 39833
-	Total arrivals: 10000
-	Total departures: 10000
-	Total processes: 10000
-	Total events: 39843
-	Total arrivals: 10000
-	Total departures: 10000
-	Total processes: 10000
-	Total events: 39823
-	Total arrivals: 10000
-	Total departures: 10000
-	Total processes: 10000
 	Total events: 39831
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 39834
+	Total events: 39826
 	Total arrivals: 10000
 	Total departures: 10000
 	Total processes: 10000
-	Total events: 39826
+	Total events: 39850
+	Total arrivals: 10000
+	Total departures: 10000
+	Total processes: 10000
+	Total events: 39840
+	Total arrivals: 10000
+	Total departures: 10000
+	Total processes: 10000
+	Total events: 39844
+	Total arrivals: 10000
+	Total departures: 10000
+	Total processes: 10000
+	Total events: 39840
+	Total arrivals: 10000
+	Total departures: 10000
+	Total processes: 10000
+	Total events: 39831
