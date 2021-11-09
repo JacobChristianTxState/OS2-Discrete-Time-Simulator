@@ -10,7 +10,7 @@ void Driver::scheduleEvent(int eventType, unsigned long time)
   std::sort(
     eventQueue.begin(),
     eventQueue.end(),
-    [](Event& e1, Event& e2) {return e1.getTime() < e2.getTime();});
+    [](Event e1, Event e2) {return e1.getTime() < e2.getTime();});
   
 }
 
