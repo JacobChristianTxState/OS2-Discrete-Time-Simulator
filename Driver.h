@@ -34,7 +34,6 @@ class Driver{
     int totalDepartures = 0;
     int eventCount = 0;
     unsigned long clock;
-    unsigned long firstArrivalTimeStamp;
     int scheduleType;
     float quantum;
 
