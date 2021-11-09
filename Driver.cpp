@@ -82,15 +82,28 @@ void Driver::arrivalHandlerSRTF(Event e)
 
 void Driver::arrivalHandlerRR(Event e)
 {
-  unsigned long nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
-  scheduleEvent(eventTypeEnums::RUN, this->clock + nextArrivalTime);
-  this->totalProcesses++;
+  unsigned long nextServiceTime = std::round(this->serviceTime.generateExponentialDist());
+  Process *newProcess = new Process(++this->totalProcesses, this->clock, nextServiceTime);
+  if (currentlyRunningProcess == nullptr)
+  {
+    currentlyRunningProcess = newProcess;
+    scheduleEvent(eventTypeEnums::RUN, this->clock);
+    // scheduleEvent(eventTypeEnums::DEP, this->clock + currentlyRunningProcess->getServiceTime());
+  }
+  else
+  {
+    processReadyQueue.push_back(newProcess);
+  }
+
   if (this->totalProcesses < PROCESSCOUNT)
   {
     unsigned long nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
     scheduleEvent(eventTypeEnums::ARR, this->clock + nextArrivalTime);
     this->totalArrivals++;
   }
+  unsigned long nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
+  scheduleEvent(eventTypeEnums::RUN, this->clock + nextArrivalTime);
+  this->totalProcesses++;
 }
 
 void Driver::runHandlerFCFS(Event e)
@@ -117,18 +130,14 @@ void Driver::runHandlerSRTF(Event e)
 void Driver::runHandlerRR(Event e)
 {
   Event eventQueueFrontElement = this->eventQueue.front();
-  eventQueue.pop_front();
-  unsigned long nextEventTimeStart = this->eventQueue.front().getTime();
-  float check = currentlyRunningProcess->getRemainingServiceTime() - quantum;
-  if(check <= 0){
-    scheduleEvent(eventTypeEnums::DEP, this->clock + quantum);
-  }else{
-    currentlyRunningProcess->setRemainingServiceTime(check);
-    Process *returningProcess = currentlyRunningProcess;
-    processReadyQueue.push_back(returningProcess);
-    currentlyRunningProcess = nullptr;
-    scheduleEvent(eventTypeEnums::ARR, this->clock + quantum);
-  }
+    float check = currentlyRunningProcess->getRemainingServiceTime() - quantum;
+    if(check <= 0){
+      scheduleEvent(eventTypeEnums::DEP, this->clock +currentlyRunningProcess->getRemainingServiceTime());
+    }else{
+      Process *returningProcess = new Process(totalProcesses, clock + quantum, check);
+      processReadyQueue.push_back(returningProcess);
+      scheduleEvent(eventTypeEnums::RUN, this->clock + quantum);
+    }
 }
 
 void Driver::departureHandler(Event e)
