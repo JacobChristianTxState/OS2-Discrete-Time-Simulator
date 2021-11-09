@@ -26,6 +26,7 @@ class Driver{
     StatisticDriver stats;
     std::deque<Event> eventQueue;
     std::deque<Process*> processReadyQueue;
+    std::vector<Event> finalScheduleSnaphot;
     Process* currentlyRunningProcess;
     bool serverIdle;
     int readyQueueCount;
@@ -45,6 +46,7 @@ class Driver{
     void arrivalHandlerFCFS(Event e);
     void arrivalHandlerSRTF(Event e);
     void arrivalHandlerRR(Event e);
+    void runHandlerFCFS(Event e);
     void runHandlerRR(Event e);
     void runHandlerSRTF(Event e);
     void departureHandler(Event e);
@@ -59,7 +61,7 @@ class Driver{
     std::string transferDataResults();
     void scheduleArrival(Event e);
     void scheduleRun(Event e);
-
+    void scheduleEvent(Event e);
 
 };
   

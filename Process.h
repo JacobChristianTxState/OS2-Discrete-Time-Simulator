@@ -4,10 +4,10 @@
 class Process{
     private:
       int processID = -1;
-      unsigned long arrivalTime = -1;
-      unsigned long serviceTime = -1;
-      unsigned long remainingServiceTime = -1;
-      unsigned long completionTime = -1;
+      unsigned long arrivalTime;
+      unsigned long serviceTime;
+      unsigned long remainingServiceTime = 0;
+      unsigned long completionTime;
     public:
       Process(int processID, unsigned long arrivalTime, unsigned long serviceTime);
       int getID();

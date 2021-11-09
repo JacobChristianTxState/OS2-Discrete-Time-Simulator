@@ -4,6 +4,7 @@ Process::Process(int processID, unsigned long arrivalTime, unsigned long service
   this->processID = processID;
   this->arrivalTime = arrivalTime;
   this->serviceTime = serviceTime;
+  this->remainingServiceTime = this->serviceTime;
 }
 
 int Process::getID(){
@@ -23,7 +24,7 @@ unsigned long Process::getRemainingServiceTime(){
 }
 
 void Process::setRemainingServiceTime(float timeSlice){
-    this->remainingServiceTime -= timeSlice;
+    this->remainingServiceTime = timeSlice;
 }
 
 unsigned long Process::getCompletionTime() {
