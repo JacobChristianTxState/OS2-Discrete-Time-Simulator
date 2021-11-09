@@ -7,16 +7,11 @@ void Driver::scheduleEvent(int eventType, unsigned long time)
   Event event(time, eventType);
   this->eventCount++;
   eventQueue.push_back(event);
-  finalScheduleSnaphot.push_back(event);
   std::sort(
     eventQueue.begin(),
     eventQueue.end(),
-    [](Event& e1, Event& e2) -> bool {return e1.getTime() < e2.getTime();});
+    [](Event& e1, Event& e2) {return e1.getTime() < e2.getTime();});
   
-  std::sort(
-    finalScheduleSnaphot.begin(),
-    finalScheduleSnaphot.end(),
-    [](Event& e1, Event& e2) -> bool {return e1.getTime() < e2.getTime();});
 }
 
 void Driver::init()

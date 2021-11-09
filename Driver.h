@@ -26,7 +26,6 @@ class Driver{
     StatisticDriver stats;
     std::deque<Event> eventQueue;
     std::deque<Process*> processReadyQueue;
-    std::vector<Event> finalScheduleSnaphot;
     Process* currentlyRunningProcess;
     bool serverIdle;
     int readyQueueCount;
