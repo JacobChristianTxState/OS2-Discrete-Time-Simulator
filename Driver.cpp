@@ -8,8 +8,7 @@ Driver::Driver(float lambda1, float lambda2, int a_id, float quantum):serviceTim
   int pid = 0;
   process_count = 0;
   float aT = arrivalTime.generateExponentialDist();
-  Process p = Process(0, aT, serviceTime.generateExponentialDist(), 0);
-  processReadyQueue.push_back(p);
+  running_process = nullptr;
   Event e = Event(aT, true);
   eventList.push_back(e);
   clock = 0;
@@ -39,16 +38,16 @@ void Driver::handleEvent(){
 
 void Driver::handleArr(){
   float arrTime = arrivalTime.generateExponentialDist();
-  Process p = Process(pid, clock + arrTime, this->serviceTime.generateExponentialDist(), 0);
-  if(serveridle == true){
-    serveridle = false;
+  Process *p = new Process(pid, clock + arrTime, this->serviceTime.generateExponentialDist(), 0);
+  if(running_process == nullptr){
+    running_process = p;
     float duh = clock + calcProcessTime();
     Event dep = Event(duh, false);
     scheduleEvent(dep);
   }else{
     pid++;
-    //scheduleProcess
     scheduleProcess(p);
+    //scheduleProcess
   }
   Event arr = Event(clock + arrTime, true);
   scheduleEvent(arr);
@@ -56,15 +55,20 @@ void Driver::handleArr(){
 
 void Driver::handleDep(){
   if(processReadyQueue.empty()){
-    serveridle = true;
+    Process *completed_process = running_process;
+    delete completed_process;
+    running_process = nullptr;
   }else{
+    running_process = processReadyQueue[0];
     processReadyQueue.erase(processReadyQueue.begin());
     Event dep = Event(clock + calcProcessTime(), false);
     scheduleEvent(dep);
+    //check if we're incremending process count or not
   }
 }
 
 float Driver::calcProcessTime(){
+  float t = 0.0;
   switch(algorithm_id){
     case 3:
       return 0.0;
@@ -74,13 +78,33 @@ float Driver::calcProcessTime(){
       break;
     default:
       this -> process_count++;
-      float t = processReadyQueue[0].getRemainingServiceTime();
+      t = running_process->getServiceTime();
       return t;
       break;
   }
+  return 0;
 }
 
-void Driver::scheduleProcess(Process p){
+void Driver::determineProcessComp(){
+  if(running_process){
+    switch(algorithm_id){
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        if(running_process->getRemainingServiceTime() - quantum <= 0){
+        }else{
+          Process *returning_process = running_process;
+          returning_process->setRemainingServiceTime(quantum);
+          processReadyQueue.push_back(returning_process);
+        }
+        break;
+    }
+  }
+}
+
+void Driver::scheduleProcess(Process *p){
   switch(algorithm_id){
     case 2:
       break;

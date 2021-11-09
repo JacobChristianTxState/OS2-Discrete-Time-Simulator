@@ -48,3 +48,5 @@ void Process::setArrivalTime(float time){
 void Process::setPriority(int priority){
   this->priority = priority;
 }
+
+

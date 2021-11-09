@@ -13,20 +13,22 @@ class Driver{
     int algorithm_id;
     int process_count;
     int pid;
+    Process * running_process;
     float quantum;
     float lambda;
     float clock;
-    std::vector<Process> processReadyQueue;
+    std::vector<Process *> processReadyQueue;
     std::vector<Event> eventList;
     DistributionGenerator arrivalTime;
     DistributionGenerator serviceTime;
-    void scheduleProcess(Process);
+    void scheduleProcess(Process *);
     void determineLocation(Process);
     void handleEvent();
     float calcProcessTime();
     void handleArr();
     void handleDep();
     void scheduleEvent(Event);
+    void determineProcessComp();
     void printList();
   public:
     Driver(float, float, int, float);
