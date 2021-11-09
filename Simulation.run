@@ -1,36 +1,37 @@
 #!/bin/bash  
 
 #remove all previous data files for clean run
-rm sim.data
-rm sim-*.data
-rm sim-*.csv
-rm run-*.txt
+rm data/sim-*.data
+rm data/sim-*.csv
+rm data/run-*.txt
 
 #makefile compiles the code
 make 
 
 #run for each type of simulation
 for ((i = 1; i <=4; i++));do
-   touch sim-$i.data
-   touch sim-$i.csv
+   touch data/sim-$i.data
+   touch data/sim-$i.csv
 
    #quantum is 10ms
    quantum=0.00  
    #average service time
    average_service_time=0.06 
    schedule=$i
-   echo "Lambda,Average Throughput,Average Turnaround Time,Cpu Utilization,Average Wait Time, Average Queue Length, Final Clock Time" >> sim-$i.data
-   echo "Lambda,Average Throughput,Average Turnaround Time,Cpu Utilization,Average Wait Time, Average Queue Length, Final Clock Time" >> sim-$i.csv
+   echo "Lambda,Average Throughput,Average Turnaround Time,Cpu Utilization,Average Wait Time, Average Queue Length, Final Clock Time" >> data/sim-$i.data
+   echo "Lambda,Average Throughput,Average Turnaround Time,Cpu Utilization,Average Wait Time, Average Queue Length, Final Clock Time" >> data/sim-$i.csv
   
    #run for each value of lambda
    if [ $schedule -eq 4 ]; then schedule=3; fi
    for ((j = 1; j <= 30; j++)); do
       if [ $i -le 3 ]; then quantum=0.01; else quantum=0.2; fi
-      ./main.exe $schedule $j $average_service_time $quantum >> run-$i.txt
-      cat sim.data >> sim-$i.data
-      cat sim.data >> sim-$i.csv
+      ./main.exe $schedule $j $average_service_time $quantum >> data/run-$i.txt
+      cat sim.data >> data/sim-$i.data
+      cat sim.data >> data/sim-$i.csv
    done 
 done
+
+rm sim.data
 
 
 
