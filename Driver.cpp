@@ -129,15 +129,18 @@ void Driver::runHandlerSRTF(Event e)
 
 void Driver::runHandlerRR(Event e)
 {
-  Event eventQueueFrontElement = this->eventQueue.front();
-    float check = currentlyRunningProcess->getRemainingServiceTime() - quantum;
-    if(check <= 0){
-      scheduleEvent(eventTypeEnums::DEP, this->clock +currentlyRunningProcess->getRemainingServiceTime());
-    }else{
-      Process *returningProcess = new Process(totalProcesses, clock + quantum, check);
-      processReadyQueue.push_back(returningProcess);
-      scheduleEvent(eventTypeEnums::RUN, this->clock + quantum);
-    }
+  printProcess(currentlyRunningProcess);
+  printProcessReadyQueue();
+  float check = currentlyRunningProcess->getRemainingServiceTime() - quantum;
+  if(check <= 0){
+    scheduleEvent(eventTypeEnums::DEP, this->clock + currentlyRunningProcess->getRemainingServiceTime());
+  }else{
+    currentlyRunningProcess->setRemainingServiceTime(check);
+    processReadyQueue.push_back(currentlyRunningProcess);
+    this->currentlyRunningProcess = this->processReadyQueue.front();
+    this->processReadyQueue.pop_front();
+    scheduleEvent(eventTypeEnums::RUN, this->clock + quantum);
+  }
 }
 
 void Driver::departureHandler(Event e)
