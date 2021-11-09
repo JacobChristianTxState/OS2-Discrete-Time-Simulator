@@ -99,7 +99,6 @@ void Driver::runHandlerFCFS(Event e)
   eventQueue.pop_front();
   unsigned long nextEventTimeStart = this->eventQueue.front().getTime();
   unsigned long elapsedCompletionTime = this->clock + currentlyRunningProcess->getRemainingServiceTime();
-  unsigned long currentRemainingServiceTime = this->currentlyRunningProcess->getRemainingServiceTime();
   long netServiceTime = elapsedCompletionTime - nextEventTimeStart;
   
   if (netServiceTime <= 0 || eventQueue.empty()) {
