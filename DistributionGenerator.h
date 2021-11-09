@@ -3,11 +3,10 @@
 #ifndef DISTRIBUTIONGENERATOR_
 #define DISTRIBUTIONGENERATOR_
 
-#define ARR 1
-#define DEP 2
-
 #include <cmath>    //for log()
 #include <cstdlib>  //for rand(), RAND_MAX
+#include "EventTypeEnum.h"
+
 
 class DistributionGenerator {
     private:
@@ -16,7 +15,7 @@ class DistributionGenerator {
         float uniformRandom();
     public:
         DistributionGenerator(float lambda, int distributionType);
-        float generateExponentialDist();
+        unsigned long generateExponentialDist();
 };
 
 #endif //DISTRIBUTIONGENERATOR_
