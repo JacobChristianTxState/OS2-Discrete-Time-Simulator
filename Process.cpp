@@ -23,17 +23,26 @@ unsigned long Process::getRemainingServiceTime(){
   return this->remainingServiceTime;
 }
 
+unsigned long Process::getCompletionTime() {
+  return this->completionTime;
+}
+
+unsigned long Process::getStartRunTime() {
+  return this->startRunTime;
+}
+
 void Process::setRemainingServiceTime(float timeSlice){
     this->remainingServiceTime = timeSlice;
 }
 
-unsigned long Process::getCompletionTime() {
-  return this->completionTime;
-}
 void Process::setCompletionTime(float completionTime) {
   this->completionTime = completionTime;
 }
 
 void Process::setArrivalTime(float arrivalTime) {
   this->arrivalTime = arrivalTime;
+}
+
+void Process::setStartRunTime(float startTime) {
+  this->startRunTime = startTime;
 }

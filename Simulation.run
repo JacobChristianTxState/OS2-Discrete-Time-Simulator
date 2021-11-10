@@ -9,7 +9,7 @@ rm data/run-*.txt
 make 
 
 #run for each type of simulation
-for ((i = 3; i <=3; i++));do
+for ((i = 1; i <=4; i++));do
    touch data/sim-$i.data
    touch data/sim-$i.csv
 
@@ -23,7 +23,7 @@ for ((i = 3; i <=3; i++));do
   
    #run for each value of lambda
    if [ $schedule -eq 4 ]; then schedule=3; fi
-   for ((j = 30; j <= 30; j++)); do
+   for ((j = 1; j <= 30; j++)); do
       if [ $i -le 3 ]; then quantum=0.01; else quantum=0.2; fi
       ./main.exe $schedule $j $average_service_time $quantum >> data/run-$i.txt
       cat sim.data >> data/sim-$i.data
