@@ -87,7 +87,6 @@ void Driver::arrivalHandlerSRTF(Event e){}
 Process* Driver::createNewProcess() {
   unsigned long nextServiceTime = std::round(this->serviceTime.generateExponentialDist());
   Process* newProcess = new Process(++this->totalProcesses, this->clock, nextServiceTime);
-  std::cout << "Creating new process: ";
   return newProcess;
 }
 
