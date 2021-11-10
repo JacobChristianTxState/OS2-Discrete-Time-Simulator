@@ -27,6 +27,8 @@ class Driver{
     std::deque<Event> eventQueue;
     std::deque<Process*> processReadyQueue;
     Process* currentlyRunningProcess;
+    bool roundRobinInterruptedProcess;
+    unsigned long roundRobinTimeAdjustment;
     bool serverIdle;
     int readyQueueCount;
     int totalProcesses = 0;
