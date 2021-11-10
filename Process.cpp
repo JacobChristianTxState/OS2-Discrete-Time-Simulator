@@ -37,3 +37,11 @@ void Process::setCompletionTime(float completionTime) {
 void Process::setArrivalTime(float arrivalTime) {
   this->arrivalTime = arrivalTime;
 }
+
+void Process::setReturnTime(unsigned long returnTime){
+  this->returnTime = returnTime;
+}
+
+unsigned long Process::getReturnTime(){
+  return returnTime;
+}

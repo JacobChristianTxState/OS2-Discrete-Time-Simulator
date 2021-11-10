@@ -34,6 +34,7 @@ void Driver::run()
     this->clock = e.getTime();
     stats.incrementClock(getClock());
     scheduleEvent(e);
+    printEvent(e);
     this->eventQueue.pop_front();
   }
   std::cout << "\tTotal arrivals: " << this->totalArrivals << "\n";
@@ -81,10 +82,12 @@ void Driver::arrivalHandlerSRTF(Event e)
     
       currentlyRunningProcess->setRemainingServiceTime(newProcess->getArrivalTime() - currentlyRunningProcess->getArrivalTime());
       processReadyQueue.push_back(currentlyRunningProcess);
-      std::sort(
-      processReadyQueue.begin(),
-      processReadyQueue.end(),
-      [](Process p1, Process p2) {return p1.getRemainingServiceTime() < p2.getRemainingServiceTime();});
+      if(processReadyQueue.size() >= 2){
+        std::sort(
+        processReadyQueue.begin(),
+        processReadyQueue.end(),
+        [](Process *p1, Process *p2) {return p1->getRemainingServiceTime() < p2->getRemainingServiceTime();});
+      }
       currentlyRunningProcess = newProcess; 
       
       scheduleEvent(eventTypeEnums::RUN, this->clock);
@@ -92,13 +95,14 @@ void Driver::arrivalHandlerSRTF(Event e)
     }
     else { 
       processReadyQueue.push_back(newProcess);
-      std::sort(
-      processReadyQueue.begin(),
-      processReadyQueue.end(),
-      [](Process p1, Process p2) {return p1.getRemainingServiceTime() < p2.getRemainingServiceTime();});
+      if(processReadyQueue.size() >= 2){
+        std::sort(
+        processReadyQueue.begin(),
+        processReadyQueue.end(),
+        [](Process *p1, Process *p2) {return p1->getRemainingServiceTime() < p2->getRemainingServiceTime();});
+      }
       }
     }
-  }
 
   if(this->totalProcesses < PROCESSCOUNT)
   {
@@ -198,14 +202,10 @@ void Driver::runHandlerSRTF(Event e)
     //a process is
     scheduleEvent(eventTypeEnums::DEP, elapsedCompletionTime);
   } else {
-    
     this->currentlyRunningProcess->setRemainingServiceTime(elapsedCompletionTime - nextEventTimeStart);
     scheduleEvent(eventTypeEnums::RUN, nextEventTimeStart);
   }
   eventQueue.push_front(eventQueueFrontElement);
-
-
-
 }
 
 void Driver::runHandlerRR(Event e)
