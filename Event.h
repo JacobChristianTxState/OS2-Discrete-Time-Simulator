@@ -9,7 +9,7 @@ class Event{
     int eType;
     Process* process;
   public:
-    Event(unsigned long, int, Process* p);
+    Event(unsigned long, int);
     int getType();
     unsigned long getTime();
     void setProcess(Process* p);
