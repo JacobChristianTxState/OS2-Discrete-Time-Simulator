@@ -82,9 +82,25 @@ void Driver::arrivalHandlerSRTF(Event e)
 
 void Driver::arrivalHandlerRR(Event e)
 {
-  unsigned long nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
-  scheduleEvent(eventTypeEnums::RUN, this->clock + nextArrivalTime);
-  this->totalProcesses++;
+  unsigned long nextServiceTime = std::round(this->serviceTime.generateExponentialDist());
+  Process *newProcess = new Process(++this->totalProcesses, this->clock, nextServiceTime);
+  if (currentlyRunningProcess == nullptr)
+  {
+    if(processReadyQueue.empty()){
+      currentlyRunningProcess = newProcess;
+      scheduleEvent(eventTypeEnums::RUN, this->clock + currentlyRunningProcess->getArrivalTime());
+    }else{
+      currentlyRunningProcess = processReadyQueue.front();
+      processReadyQueue.pop_front();
+      scheduleEvent(eventTypeEnums::RUN, this->clock + currentlyRunningProcess->getArrivalTime());
+    }
+    // scheduleEvent(eventTypeEnums::DEP, this->clock + currentlyRunningProcess->getServiceTime());
+  }
+  else
+  {
+    processReadyQueue.push_back(newProcess);
+  }
+
   if (this->totalProcesses < PROCESSCOUNT)
   {
     unsigned long nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
@@ -116,6 +132,18 @@ void Driver::runHandlerSRTF(Event e)
 
 void Driver::runHandlerRR(Event e)
 {
+  //printProcessReadyQueue();
+    float check = currentlyRunningProcess->getRemainingServiceTime() - quantum;
+    if(check <= 0){
+      //Event dep = Event(eventTypeEnums::DEP, clock + currentlyRunningProcess->getRemainingServiceTime());
+      scheduleEvent(eventTypeEnums::DEP, clock + currentlyRunningProcess->getRemainingServiceTime());
+    }else{
+      currentlyRunningProcess->setRemainingServiceTime(check);
+      processReadyQueue.push_back(currentlyRunningProcess);
+      currentlyRunningProcess = processReadyQueue.front();
+      processReadyQueue.pop_front();
+      scheduleEvent(eventTypeEnums::RUN, clock + quantum);
+    }
 }
 
 void Driver::departureHandler(Event e)
