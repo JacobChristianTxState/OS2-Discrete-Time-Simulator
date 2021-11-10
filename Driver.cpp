@@ -34,7 +34,7 @@ void Driver::run()
     this->clock = e.getTime();
     stats.incrementClock(getClock());
     scheduleEvent(e);
-    printEvent(e);
+   
     this->eventQueue.pop_front();
   }
   std::cout << "\tTotal arrivals: " << this->totalArrivals << "\n";
@@ -71,6 +71,7 @@ void Driver::arrivalHandlerSRTF(Event e)
 {
   unsigned long nextServiceTime = std::round(this->serviceTime.generateExponentialDist());
   Process *newProcess = new Process(++this->totalProcesses, this->clock, nextServiceTime);
+
   if (currentlyRunningProcess == nullptr)
   {
     currentlyRunningProcess = newProcess;
@@ -79,8 +80,16 @@ void Driver::arrivalHandlerSRTF(Event e)
   else
   {
     if(newProcess->getServiceTime() < currentlyRunningProcess->getRemainingServiceTime()){
-    
-      currentlyRunningProcess->setRemainingServiceTime(newProcess->getArrivalTime() - currentlyRunningProcess->getArrivalTime());
+      
+      if(currentlyRunningProcess->getReturnTime() > 0)
+      {
+        currentlyRunningProcess->setRemainingServiceTime(newProcess->getArrivalTime() - currentlyRunningProcess->getReturnTime());
+
+      }
+      else {
+        currentlyRunningProcess->setRemainingServiceTime(newProcess->getArrivalTime() - currentlyRunningProcess->getArrivalTime());
+      }
+      currentlyRunningProcess->setReturnTime(newProcess->getArrivalTime());
       processReadyQueue.push_back(currentlyRunningProcess);
       if(processReadyQueue.size() >= 2){
         std::sort(
@@ -149,26 +158,15 @@ void Driver::arrivalHandlerRR(Event e)
 
 void Driver::runHandlerFCFS(Event e)
 {
-  // get front of Event Queue
   Event eventQueueFrontElement = this->eventQueue.front();
-  // pop it from Event Queue
   eventQueue.pop_front();
-  // get time of event
   unsigned long nextEventTimeStart = this->eventQueue.front().getTime();
-  // get time current process will end
   float elapsedCompletionTime = this->clock + currentlyRunningProcess->getRemainingServiceTime();
-  // get time difference of current process end to incoming event start
   long netServiceTime = elapsedCompletionTime - nextEventTimeStart;
-  // if time difference is <= 0, a process will arrive before current one departs
-  // so schedule departure of current process
-  // if a process will not arrive before current one departs,
-  // update current process service time and schedule a run with updated time
-  // no matter what, put the front of event queue back where it was
+
   if(netServiceTime <= 0 || eventQueue.empty()) {
-    //a process is
     scheduleEvent(eventTypeEnums::DEP, elapsedCompletionTime);
   } else {
-    
     this->currentlyRunningProcess->setRemainingServiceTime(elapsedCompletionTime - nextEventTimeStart);
     scheduleEvent(eventTypeEnums::RUN, nextEventTimeStart);
   }
@@ -177,29 +175,13 @@ void Driver::runHandlerFCFS(Event e)
 
 void Driver::runHandlerSRTF(Event e)
 {
-  //take event at front of queue
-  //get event after that's time
-  // check if current process time is 
-
-  // put event at front of queue
-
-  // get front of Event Queue
   Event eventQueueFrontElement = this->eventQueue.front();
-  // pop it from Event Queue
   eventQueue.pop_front();
-  // get time of event
   unsigned long nextEventTimeStart = this->eventQueue.front().getTime();
-  // get time current process will end
   float elapsedCompletionTime = this->clock + currentlyRunningProcess->getRemainingServiceTime();
-  // get time difference of current process end to incoming event start
   long netServiceTime = elapsedCompletionTime - nextEventTimeStart;
-  // if time difference is <= 0, a process will arrive before current one departs
-  // so schedule departure of current process
-  // if a process will not arrive before current one departs,
-  // update current process service time and schedule a run with updated time
-  // no matter what, put the front of event queue back where it was
+  
   if(netServiceTime <= 0 || eventQueue.empty()) {
-    //a process is
     scheduleEvent(eventTypeEnums::DEP, elapsedCompletionTime);
   } else {
     this->currentlyRunningProcess->setRemainingServiceTime(elapsedCompletionTime - nextEventTimeStart);
