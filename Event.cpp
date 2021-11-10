@@ -1,6 +1,6 @@
 #include "Event.h"
 
-Event::Event(unsigned long t, int ty, Process* p) : time(t), eType(ty), process(p) {}
+Event::Event(unsigned long t, int ty) : time(t), eType(ty) {}
 
 int Event::getType(){
   return eType;
