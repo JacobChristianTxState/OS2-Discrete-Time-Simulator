@@ -9,7 +9,7 @@ rm data/run-*.txt
 make 
 
 #run for each type of simulation
-for ((i = 1; i <=1; i++));do
+for ((i = 1; i <=4; i++));do
    touch data/sim-$i.data
    touch data/sim-$i.csv
 
