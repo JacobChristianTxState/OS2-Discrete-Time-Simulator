@@ -43,3 +43,4 @@ void Logger::ReadFromFile() {
         fileStream.clear();
         fileStream.seekg(0);
     }
+}
