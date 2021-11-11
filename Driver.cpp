@@ -90,7 +90,7 @@ void Driver::runDepartureFCFS(Event runningEvent){
   } else {
     Process* nextProcess = processReadyQueue.front();
     processReadyQueue.pop_front();
-    scheduleNextEvent(eventTypeEnums::DEP, this->quantum + nextProcess->getRemainingServiceTime(), nextProcess);
+    scheduleNextEvent(eventTypeEnums::DEP, this->clock + nextProcess->getRemainingServiceTime(), nextProcess);
   }
 
   runningEvent.getProcess()->setCompletionTime(this->clock);
