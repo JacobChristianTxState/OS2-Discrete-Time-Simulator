@@ -19,6 +19,5 @@ int main(int argc, char *argv[]) {
     Driver driver(arrivalTime, serviceTime, scheduleType, quantum);
     driver.init();
     driver.run();
-    //std::cout << "\t\t\tFinal time: " << driver.getClock() << "\n\n";
     return 0;
 }
