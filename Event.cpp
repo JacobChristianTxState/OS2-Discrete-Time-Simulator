@@ -3,7 +3,7 @@
 Event::Event(unsigned long t, int ty, Process* process){
   time = t;
   eType = ty;
-  this->eventProcess = process;
+    this->eventProcess = process;
 }
 
 int Event::getType(){
