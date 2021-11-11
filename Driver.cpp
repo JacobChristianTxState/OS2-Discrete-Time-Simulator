@@ -11,18 +11,19 @@ Driver::Driver(DistributionGenerator at, DistributionGenerator st, int scheduleT
 void Driver::scheduleNextEvent(int eventType, unsigned long time, Process* process)
 {
   Event event(time, eventType, process);
-  std::cout << "Scheduling event for: ";
-  printProcess(process);
+  //std::cout << "Scheduling event for: ";
+  //printProcess(process);
+  //std::cout << "\n";
   this->eventCount++;
   eventQueue.push_back(event);
-  std::cout << "next event: ";
-  printEvent(event);
-  std::cout << "Event queue: ";
+  // std::cout << "next event: ";
+  // printEvent(event);
+  // std::cout << "Event queue: ";
   std::sort(
     eventQueue.begin(),
     eventQueue.end(),
     [](Event e1, Event e2) {return e1.getTime() < e2.getTime();});
-  printEvents();
+  // printEvents();
 
 }
 
@@ -43,22 +44,26 @@ void Driver::run()
   this->logger.OpenFile();
   while (this->totalProcesses < PROCESSCOUNT || !eventQueue.empty())
   {
-    std::cout << "\nRUNNING EVENT :" << ++totalEvents << "\n";
-    std::cout << "QUANTUM: " << this->quantum << "\n";
+    // std::cout << "\nRUNNING EVENT :" << ++totalEvents << "\n";
+    // std::cout << "QUANTUM: " << this->quantum << "\n";
     Event e = this->eventQueue.front();
     this->clock = e.getTime();
     stats.incrementClock(getClock());
-    std::cout << "CURRENT EVENT: ";
-    printEvent(e);
-    std::cout << "\n\tCURRENT TIME FOR EVENT: " << this->clock;
-    std::cout << "\n\tCURRENT PROCESS: ";
-    printProcess(e.getProcess());
-    std::cout << "\t CURRENT PRQ: ";
-    printProcessReadyQueue();
-    std::cout << "\tSTARTING RUN...\n";
+    // std::cout << "CURRENT EVENT: ";
+    // printEvent(e);
+    // std::cout << "CURRENT EVENT QUEUE: ";
+    // printEvents();
+    // std::cout << "\n\tCURRENT TIME FOR EVENT: " << this->clock;
+    // std::cout << "\n\tCURRENT PROCESS: ";
+    // printProcess(e.getProcess());
+    // std::cout << "\t CURRENT PRQ: ";
+    // printProcessReadyQueue();
+    // std::cout << "\tSTARTING RUN...\n";
     scheduleEvent(e);
-
+    // std::cout << "Popping current event from queue.\n";
     this->eventQueue.pop_front();
+    // std::cout << "CURRENT EVENT QUEUE: ";
+    // printEvents();
   }
   std::cerr << "\tTotal arrivals: " << this->totalArrivals << "\n";
   std::cerr << "\tTotal departures: " << this->totalDepartures << "\n";
@@ -92,12 +97,12 @@ void Driver::runDepartureFCFS(Event runningEvent){
     processReadyQueue.pop_front();
     scheduleNextEvent(eventTypeEnums::DEP, this->clock + nextProcess->getRemainingServiceTime(), nextProcess);
   }
-
   runningEvent.getProcess()->setCompletionTime(this->clock);
   stats.collectDepartureStats(*runningEvent.getProcess());
   this->totalDepartures++;
   delete runningEvent.getProcess();
 }
+
 
 void Driver::arrivalHandlerRR(Event arrivingEvent) {
   if (serverIdle) {

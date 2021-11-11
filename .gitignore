@@ -55,5 +55,9 @@ dkms.conf
 .vs
 main.exe
 
+<<<<<<< Updated upstream
 data/*.txt
 *.txt
+=======
+data/*.txt
+>>>>>>> Stashed changes
