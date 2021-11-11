@@ -37,9 +37,13 @@ void Driver::run()
   this->logger.OpenFile();
   while (this->totalProcesses < PROCESSCOUNT || !eventQueue.empty())
   {
+    std::cout << "\nRUNNING EVENT :" << ++totalEvents << "\n";
+    std::cout << "QUANTUM: " << this->quantum << "\n";
     Event e = this->eventQueue.front();
     this->clock = e.getTime();
     stats.incrementClock(getClock());
+    std::cout << "Current event schedule: ";
+    printEvents();
     scheduleEvent(e);
     this->eventQueue.pop_front();
   }
@@ -82,13 +86,52 @@ void Driver::runDepartureFCFS(Event runningEvent){
   }
 }
 
-void Driver::arrivalHandlerSRTF(Event e){}
+void Driver::arrivalHandlerRR(Event arrivingEvent) {
+  if (serverIdle) {
+    serverIdle = false;
+    scheduleNextEvent(eventTypeEnums::DEP, this->clock + this->quantum, arrivingEvent.getProcess());
+  } else {
+    this->processReadyQueue.push_back(arrivingEvent.getProcess());
+  }
+  
+  if (this->totalProcesses < PROCESSCOUNT) {
+    unsigned long nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
+    scheduleNextEvent(eventTypeEnums::ARR, this->clock + nextArrivalTime, createNewProcess());
+    this->totalArrivals++;
+  }
+}
+
+void Driver::runDepartureRR(Event runningEvent) {
+  if (processReadyQueue.empty()) {
+    serverIdle = true;
+  }
+  long check = runningEvent.getProcess()->getRemainingServiceTime() - this->quantum;
+  std::cout << "Curently running process: ";
+  printProcess(runningEvent.getProcess());
+  std::cout << "Check's value: " << check << "\n";
+  
+  if (check <= 0) {
+    runningEvent.getProcess()->setCompletionTime(this->clock);
+    if (runningEvent.getProcess()->getRemainingServiceTime() == 0) {
+      runningEvent.getProcess()->setCompletionTime(this->clock);
+      stats.collectDepartureStats(*runningEvent.getProcess());
+      delete runningEvent.getProcess();
+    } else {
+    runningEvent.getProcess()->setRemainingServiceTime(runningEvent.getProcess()->getRemainingServiceTime() - this->quantum);
+    this->processReadyQueue.push_back(runningEvent.getProcess());
+    Process* nextProcess = processReadyQueue.front();
+    processReadyQueue.pop_front();
+    scheduleNextEvent(eventTypeEnums::ARR, this->clock + this->quantum, createNewProcess());
+    }
+  }
+}
 
 Process* Driver::createNewProcess() {
-  unsigned long nextServiceTime = std::round(this->serviceTime.generateExponentialDist());
-  Process* newProcess = new Process(++this->totalProcesses, this->clock, nextServiceTime);
-  return newProcess;
-}
+    unsigned long nextServiceTime = std::round(this->serviceTime.generateExponentialDist());
+    Process* newProcess = new Process(++this->totalProcesses, this->clock, nextServiceTime);
+    return newProcess;
+  }
+
 
 unsigned long Driver::getClock() {
   return this->clock;
@@ -185,7 +228,7 @@ std::string Driver::transferDataResults() {
 void Driver::scheduleArrival(Event e) {
   switch (e.getType()) {
   case eventTypeEnums::RR:
-    //arrivalHandlerRR(e);
+    arrivalHandlerRR(e);
     break;
   case eventTypeEnums::FCFS:
     arrivalHandlerFCFS(e);
@@ -202,7 +245,7 @@ void Driver::scheduleDeparture(Event e) {
       runDepartureFCFS(e);
     break;
   case eventTypeEnums::RR:
-   // runHandlerRR(e);
+      runDepartureRR(e);
     break;
   case eventTypeEnums::SRTF:
    // runHandlerSRTF(e);
@@ -222,3 +265,4 @@ void Driver::scheduleEvent(Event e) {
     std::cerr << "ERROR WITH SCHEDULING\n";
   }
 }
+
