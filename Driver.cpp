@@ -41,11 +41,6 @@ void Driver::run()
     scheduleEvent(e);
     this->eventQueue.pop_front();
   }
-  std::cerr << "\tTotal arrivals: " << this->totalArrivals << "\n";
-  std::cerr << "\tTotal departures: " << this->totalDepartures << "\n";
-  std::cerr << "\tTotal processes: " << this->totalProcesses << "\n";
-  std::cerr << "\tTotal events: " << this->eventCount << "\n";
-  std::cerr << "\tFinal Time: " << this->clock << "\n\n";
   this->logger.WriteToFile(transferDataResults());
   this->logger.CloseFile();
 }
