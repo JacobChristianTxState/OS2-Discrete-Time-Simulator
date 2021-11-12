@@ -11,19 +11,12 @@ Driver::Driver(DistributionGenerator at, DistributionGenerator st, int scheduleT
 void Driver::scheduleNextEvent(int eventType, unsigned long time, Process* process)
 {
   Event event(time, eventType, process);
-  std::cout << "Scheduling event for: ";
-  printProcess(process);
-  std::cout << "\n";
   this->eventCount++;
   eventQueue.push_back(event);
-  std::cout << "next event: ";
-  printEvent(event);
-  std::cout << "Event queue: ";
   std::sort(
     eventQueue.begin(),
     eventQueue.end(),
     [](Event e1, Event e2) {return e1.getTime() < e2.getTime();});
-  printEvents();
 
 }
 
@@ -39,30 +32,21 @@ void Driver::init()
 
 void Driver::run()
 {
-  unsigned long totalEvents = 0;
   this->logger.OpenFile();
   while (this->totalProcesses < PROCESSCOUNT || !eventQueue.empty())
   {
-    std::cout << "\nRUNNING EVENT :" << ++totalEvents << "\n";
-    std::cout << "QUANTUM: " << this->quantum << "\n";
     Event e = this->eventQueue.front();
     this->clock = e.getTime();
     stats.incrementClock(getClock());
-    std::cout << "CURRENT EVENT: ";
+    std::cout << "CURRENT QUEUE: ";
     printEvent(e);
-    std::cout << "CURRENT EVENT QUEUE: ";
-    printEvents();
-    std::cout << "\n\tCURRENT TIME FOR EVENT: " << this->clock;
-    std::cout << "\n\tCURRENT PROCESS: ";
+    std::cout << "\nCURRENT PROCESS: ";
     printProcess(e.getProcess());
-    std::cout << "\t CURRENT PRQ: ";
+    std::cout << "\n\n";
+    std::cout << "CURRENT PROCESS QUEUE: ";
     printProcessReadyQueue();
-    std::cout << "\tSTARTING RUN...\n";
     scheduleEvent(e);
-    std::cout << "Popping current event from queue.\n";
     this->eventQueue.pop_front();
-    std::cout << "CURRENT EVENT QUEUE: ";
-    printEvents();
   }
   std::cerr << "\tTotal arrivals: " << this->totalArrivals << "\n";
   std::cerr << "\tTotal departures: " << this->totalDepartures << "\n";
@@ -74,19 +58,11 @@ void Driver::run()
 }
 
 void Driver::arrivalHandlerFCFS(Event arrivingEvent){
-  std::cout << "Handling arrival of: ";
-  printProcess(arrivingEvent.getProcess());
   if (serverIdle) {
-    std::cout << "Server is idle.\n";
     serverIdle = false;
     scheduleNextEvent(eventTypeEnums::DEP, this->clock + arrivingEvent.getProcess()->getServiceTime(), arrivingEvent.getProcess());
   } else {
-    std::cout << "Pushing back into queue: ";
-    printProcess(arrivingEvent.getProcess());
-    printProcessReadyQueue();
     this->processReadyQueue.push_back(arrivingEvent.getProcess());
-    std::cout << "Process ready queue after: ";
-    printProcessReadyQueue();
   }
   
   if (this->totalProcesses < PROCESSCOUNT) {
@@ -97,28 +73,17 @@ void Driver::arrivalHandlerFCFS(Event arrivingEvent){
 }
 
 void Driver::runDepartureFCFS(Event runningEvent){
-  std::cout << "RUNNING PROCESS: ";
-  printProcess(runningEvent.getProcess());
-  std::cout << "\n";
   if (processReadyQueue.empty()) {
-    std::cout << "Process queue is empty.\n";
     serverIdle = true;
+    std::cout << "1c. NO OTHER PROCESSES RUNNING, SERVER WILL BE IDLE.\n";
   } else {
-    std::cout << "Getting next process from ready queue.\n";
     Process* nextProcess = processReadyQueue.front();
     processReadyQueue.pop_front();
-    std::cout << "Running next: ";
+    std::cout << "1d. NEXT DEPARURE STATUS: " << this->clock + nextProcess->getRemainingServiceTime() << "\n";
     printProcess(nextProcess);
-    std::cout << "Updated process ready queue: ";
-    printProcessReadyQueue();
     scheduleNextEvent(eventTypeEnums::DEP, this->clock + nextProcess->getRemainingServiceTime(), nextProcess);
   }
-  std::cout << "Deleting: ";
-  printProcess(runningEvent.getProcess());
-  runningEvent.getProcess()->setCompletionTime(this->clock);
-  stats.collectDepartureStats(*runningEvent.getProcess());
-  this->totalDepartures++;
-  delete runningEvent.getProcess();
+  handleProcessExit(runningEvent.getProcess(), this->clock);
 }
 
 
@@ -144,35 +109,95 @@ void Driver::arrivalHandlerRR(Event arrivingEvent) {
   }
 }
 
+
 void Driver::runDepartureRR(Event runningEvent) {
-  
   long check = runningEvent.getProcess()->getRemainingServiceTime() - this->quantum;
+  unsigned long workRemaining = (check <= 0) ? runningEvent.getProcess()->getRemainingServiceTime() : this->quantum;
   if (check <= 0) {
     if (processReadyQueue.empty()) {
       serverIdle = true;
     } else {
       Process* nextProcess = processReadyQueue.front();
+      long nextCheck = nextProcess->getRemainingServiceTime() - this->quantum;
+      unsigned long nextWorkRemaining = (nextCheck <= 0) ? nextProcess->getRemainingServiceTime() : this->quantum;
       processReadyQueue.pop_front();
-      scheduleNextEvent(eventTypeEnums::DEP, this->clock + runningEvent.getProcess()->getRemainingServiceTime(), nextProcess);
+      scheduleNextEvent(eventTypeEnums::DEP, this->clock + nextWorkRemaining, nextProcess);
     }
-    
-    runningEvent.getProcess()->setCompletionTime(this->clock + runningEvent.getProcess()->getRemainingServiceTime());
-    runningEvent.getProcess()->setRemainingServiceTime(0);
-    
-    stats.collectDepartureStats(*runningEvent.getProcess());
-    delete runningEvent.getProcess();
-    
+    handleProcessExit(runningEvent.getProcess(), this->clock);
   } else {
+    long nextCheck = runningEvent.getProcess()->getRemainingServiceTime() - this->quantum;
+    unsigned long nextWorkRemaining = (nextCheck <= 0) ? runningEvent.getProcess()->getRemainingServiceTime() : this->quantum;
     runningEvent.getProcess()->setRemainingServiceTime(runningEvent.getProcess()->getRemainingServiceTime() - this->quantum);
     if(processReadyQueue.empty()) {
-      scheduleNextEvent(eventTypeEnums::DEP, this->clock + this->quantum, runningEvent.getProcess());
+      scheduleNextEvent(eventTypeEnums::DEP, this->clock + nextWorkRemaining, runningEvent.getProcess());
     } else {
       this->processReadyQueue.push_back(runningEvent.getProcess());
       Process* nextProcess = processReadyQueue.front();
       processReadyQueue.pop_front();
-      scheduleNextEvent(eventTypeEnums::DEP, this->clock + this->quantum, nextProcess);
+      scheduleNextEvent(eventTypeEnums::DEP, this->clock + nextWorkRemaining, nextProcess);
     }
   }
+
+}
+
+void Driver::arrivalHandlerSRTF(Event arrivingEvent) {
+  std::cout << "CLOCK: " << this->clock << "\n";
+  std::cout << "RUNNING PROCESS: ";
+  printProcess(arrivingEvent.getProcess());
+  if (serverIdle) {
+    std::cout << "1a. SERVER IS IDLE.\n";
+    serverIdle = false;
+    scheduleNextEvent(eventTypeEnums::DEP, this->clock + arrivingEvent.getProcess()->getRemainingServiceTime(), arrivingEvent.getProcess());
+  } else {
+    eventQueue.pop_front();
+    if (!eventQueue.empty()) {
+      std::cout << "1b. EVENT QUEUE IS NOT EMPTY.\n";
+      Event currentEvent = eventQueue.front();
+      Event nextEvent = eventQueue.front();
+      if (nextEvent.getType() == eventTypeEnums::DEP) {
+        Process* nextProcess = nextEvent.getProcess();
+        Process* currentProcess = arrivingEvent.getProcess();
+        std::cout << "IS ARRIVING EVENT < NEXT EVENT: " << nextProcess->getRemainingServiceTime() << " <? " << currentProcess->getRemainingServiceTime() << "\n";
+        if (arrivingEvent.getProcess()->getRemainingServiceTime() < nextEvent.getProcess()->getRemainingServiceTime()) {
+          eventQueue.pop_front();
+          std::cout << "2b. NEXT EVENT IS AN ARRIVAL AND IT'LL HAPPEN BEFORE WE'RE FINISHED.\n";
+          long netTime = nextEvent.getTime()-nextProcess->getRemainingServiceTime() - this->clock;
+          if (netTime < 0) {
+            netTime *= -1;
+          }
+          std::cout << "3b. NEXT PROCESS RAN FOR: " << netTime << "\n";
+          nextProcess->setRemainingServiceTime(nextProcess->getRemainingServiceTime() - netTime);
+          std::cout << "4b. UPDATED NEXT PROCESS: ";
+          printProcess(nextProcess);
+          std::cout << "5b. SCHEDULING FOR THE FOLLOWING PROCESS: ";
+          printProcess(currentProcess);
+          scheduleNextEvent(eventTypeEnums::DEP, this->clock + currentProcess->getRemainingServiceTime(), currentProcess);
+          processReadyQueue.push_back(nextProcess);
+        } else {
+           this->processReadyQueue.push_back(arrivingEvent.getProcess());
+          eventQueue.push_front(currentEvent);
+
+        }
+      }
+
+    }
+  }
+  
+  if (this->totalProcesses < PROCESSCOUNT) {
+    unsigned long nextArrivalTime = std::round(this->arrivalTime.generateExponentialDist());
+    scheduleNextEvent(eventTypeEnums::ARR, this->clock + nextArrivalTime, createNewProcess(this->clock+nextArrivalTime));
+    this->totalArrivals++;
+  }
+  std::sort(
+    processReadyQueue.begin(),
+    processReadyQueue.end(),
+            [](Process* p1, Process* p2) {return p1->getRemainingServiceTime() < p2->getRemainingServiceTime();});
+  std::cout << "Process ready queue sorted: ";
+  printProcessReadyQueue();
+}
+
+void Driver::runDepartureSRTF(Event departingEvent) {
+  runDepartureFCFS(departingEvent);
 }
 
 Process* Driver::createNewProcess(unsigned long time) {
@@ -203,9 +228,6 @@ void Driver::printEvent(Event e){
   case eventTypeEnums::DEP:
     type = "DEP";
     break;
-  case eventTypeEnums::RUN:
-    type = "RUN";
-    break;
   default:
     type = "ERR";
     break;
@@ -214,8 +236,6 @@ void Driver::printEvent(Event e){
     type = "ARR";
   } else if (e.getType() == eventTypeEnums::DEP) {
     type = "DEP";
-  } else {
-    type = "RUN";
   }
   std::cerr << "(" << type << ", " << e.getTime() << ")";
 }
@@ -283,8 +303,7 @@ void Driver::scheduleArrival(Event e) {
     arrivalHandlerFCFS(e);
     break;
   case eventTypeEnums::SRTF:
-    std::cout << "Scheduling shortest remaining time first.\n\n";
-    //arrivalHandlerSRTF(e);
+      arrivalHandlerSRTF(e);
     break;
   }
 }
@@ -298,7 +317,7 @@ void Driver::scheduleDeparture(Event e) {
       runDepartureRR(e);
     break;
   case eventTypeEnums::SRTF:
-   // runHandlerSRTF(e);
+    runDepartureSRTF(e);
     break;
   }
 }
@@ -314,5 +333,14 @@ void Driver::scheduleEvent(Event e) {
   default:
     std::cerr << "ERROR WITH SCHEDULING\n";
   }
+}
+
+void Driver::handleProcessExit(Process* process, unsigned long finalTime) {
+  process->setCompletionTime(finalTime);
+  process->setRemainingServiceTime(0);
+  stats.collectDepartureStats(*process);
+  this->totalDepartures++;
+  process->printProcessInformation();
+  delete process;
 }
 

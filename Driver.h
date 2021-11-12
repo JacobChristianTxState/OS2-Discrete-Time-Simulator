@@ -30,7 +30,7 @@ class Driver{
     bool roundRobinInterruptedProcess;
     unsigned long roundRobinTimeAdjustment;
     bool serverIdle;
-  bool preemptiveSwap = false;;
+  bool arrivalMidRun = false;;
     int readyQueueCount;
     int totalProcesses = 0;
     int totalArrivals = 0;
@@ -68,6 +68,7 @@ class Driver{
   Process* createNewProcess(unsigned long time);
   void preemptProcessReadyQueue();
   void scheduleDeparture(Event);
+  void handleProcessExit(Process* process, unsigned long finalTime);
   
 
 };
