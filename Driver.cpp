@@ -38,13 +38,6 @@ void Driver::run()
     Event e = this->eventQueue.front();
     this->clock = e.getTime();
     stats.incrementClock(getClock());
-    std::cout << "CURRENT QUEUE: ";
-    printEvent(e);
-    std::cout << "\nCURRENT PROCESS: ";
-    printProcess(e.getProcess());
-    std::cout << "\n\n";
-    std::cout << "CURRENT PROCESS QUEUE: ";
-    printProcessReadyQueue();
     scheduleEvent(e);
     this->eventQueue.pop_front();
   }
@@ -75,12 +68,9 @@ void Driver::arrivalHandlerFCFS(Event arrivingEvent){
 void Driver::runDepartureFCFS(Event runningEvent){
   if (processReadyQueue.empty()) {
     serverIdle = true;
-    std::cout << "1c. NO OTHER PROCESSES RUNNING, SERVER WILL BE IDLE.\n";
   } else {
     Process* nextProcess = processReadyQueue.front();
     processReadyQueue.pop_front();
-    std::cout << "1d. NEXT DEPARURE STATUS: " << this->clock + nextProcess->getRemainingServiceTime() << "\n";
-    printProcess(nextProcess);
     scheduleNextEvent(eventTypeEnums::DEP, this->clock + nextProcess->getRemainingServiceTime(), nextProcess);
   }
   handleProcessExit(runningEvent.getProcess(), this->clock);
@@ -141,45 +131,31 @@ void Driver::runDepartureRR(Event runningEvent) {
 }
 
 void Driver::arrivalHandlerSRTF(Event arrivingEvent) {
-  std::cout << "CLOCK: " << this->clock << "\n";
-  std::cout << "RUNNING PROCESS: ";
-  printProcess(arrivingEvent.getProcess());
   if (serverIdle) {
-    std::cout << "1a. SERVER IS IDLE.\n";
     serverIdle = false;
     scheduleNextEvent(eventTypeEnums::DEP, this->clock + arrivingEvent.getProcess()->getRemainingServiceTime(), arrivingEvent.getProcess());
   } else {
     eventQueue.pop_front();
     if (!eventQueue.empty()) {
-      std::cout << "1b. EVENT QUEUE IS NOT EMPTY.\n";
       Event currentEvent = eventQueue.front();
       Event nextEvent = eventQueue.front();
       if (nextEvent.getType() == eventTypeEnums::DEP) {
         Process* nextProcess = nextEvent.getProcess();
         Process* currentProcess = arrivingEvent.getProcess();
-        std::cout << "IS ARRIVING EVENT < NEXT EVENT: " << nextProcess->getRemainingServiceTime() << " <? " << currentProcess->getRemainingServiceTime() << "\n";
         if (arrivingEvent.getProcess()->getRemainingServiceTime() < nextEvent.getProcess()->getRemainingServiceTime()) {
           eventQueue.pop_front();
-          std::cout << "2b. NEXT EVENT IS AN ARRIVAL AND IT'LL HAPPEN BEFORE WE'RE FINISHED.\n";
           long netTime = nextEvent.getTime()-nextProcess->getRemainingServiceTime() - this->clock;
           if (netTime < 0) {
             netTime *= -1;
           }
-          std::cout << "3b. NEXT PROCESS RAN FOR: " << netTime << "\n";
           nextProcess->setRemainingServiceTime(nextProcess->getRemainingServiceTime() - netTime);
-          std::cout << "4b. UPDATED NEXT PROCESS: ";
-          printProcess(nextProcess);
-          std::cout << "5b. SCHEDULING FOR THE FOLLOWING PROCESS: ";
-          printProcess(currentProcess);
           scheduleNextEvent(eventTypeEnums::DEP, this->clock + currentProcess->getRemainingServiceTime(), currentProcess);
           processReadyQueue.push_back(nextProcess);
         } else {
            this->processReadyQueue.push_back(arrivingEvent.getProcess());
           eventQueue.push_front(currentEvent);
-
         }
       }
-
     }
   }
   
@@ -192,8 +168,6 @@ void Driver::arrivalHandlerSRTF(Event arrivingEvent) {
     processReadyQueue.begin(),
     processReadyQueue.end(),
             [](Process* p1, Process* p2) {return p1->getRemainingServiceTime() < p2->getRemainingServiceTime();});
-  std::cout << "Process ready queue sorted: ";
-  printProcessReadyQueue();
 }
 
 void Driver::runDepartureSRTF(Event departingEvent) {
